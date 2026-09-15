@@ -8,7 +8,9 @@ import {
   Cpu,
   ChevronRight,
   ChevronDown,
-  ArrowRight
+  ArrowRight,
+  CheckCircle2,
+  Layers
 } from 'lucide-react';
 
 // =========================================================================
@@ -20,7 +22,7 @@ const SERVICES_DATA = {
     id: 'ss-tube-structure',
     name: 'Tube Structure & Channel Angle Fabrication',
     categoryLabel: 'SS FABRICATION',
-    image: '/images/gallery_assets/structural_frame_01.jpg',
+    image: '/images/service_ss_tube_structure.jpg',
     description: 'Custom stainless-steel structural fabrication for industrial machine frames, equipment support stands and cleanroom structures, fabricated to project specifications and structural load requirements.',
     highlights: ['Custom Fabrication', 'Structural Support', 'Industrial Framing'],
     idealFor: 'Machine base frames, structural platforms and cleanroom equipment supports.'
@@ -29,7 +31,7 @@ const SERVICES_DATA = {
     id: 'ss-ducting',
     name: 'SS Ducting Fabrication',
     categoryLabel: 'SS FABRICATION',
-    image: '/images/gallery_assets/sheetmetal_ducts_12.jpg',
+    image: '/images/service_ss_ducting.jpg',
     description: 'Corrosion-resistant stainless-steel ducting lines, transitions and manifolds engineered for industrial ventilation, fume extraction and clean air distribution systems.',
     highlights: ['Custom Ducting', 'Ventilation Systems', 'Stainless Steel'],
     idealFor: 'Industrial exhaust, cleanroom airflow and chemical fume extraction.'
@@ -38,7 +40,7 @@ const SERVICES_DATA = {
     id: 'ss-tank',
     name: 'SS Tank Fabrication',
     categoryLabel: 'SS FABRICATION',
-    image: '/images/gallery_assets/sheetmetal_hopper_10.jpg',
+    image: '/images/service_ss_tank.jpg',
     description: 'Custom stainless-steel tank fabrication developed for industrial process, storage and equipment requirements. Fabrication is tailored to project-specific capacity and dimensional parameters.',
     highlights: ['Custom Fabrication', 'Stainless Steel', 'Industrial Applications'],
     idealFor: 'Industrial process liquids, chemical storage and plant utility tanks.'
@@ -74,7 +76,7 @@ const SERVICES_DATA = {
     id: 'ss-ndt',
     name: 'SS 3rd Party NDT Facility',
     categoryLabel: 'SS FABRICATION',
-    image: '/images/qc_measuring.jpg',
+    image: '/images/service_ss_ndt.jpg',
     description: 'Coordination and facilitation of third-party non-destructive testing including dye penetrant, radiography and ultrasonic inspection for certified weld and structural integrity.',
     highlights: ['Quality Inspection', 'Weld Verification', 'NDT Testing'],
     idealFor: 'Critical industrial fabrications, pressure components and compliance verification.'
@@ -103,7 +105,7 @@ const SERVICES_DATA = {
     id: 'ms-tube-channel',
     name: 'Square Tube, Channel & I-Beam Fabrication',
     categoryLabel: 'MS FABRICATION',
-    image: '/images/gallery_assets/structural_frame_02.jpg',
+    image: '/images/service_ms_tube_channel.jpg',
     description: 'Heavy structural mild-steel fabrication utilizing square tubes, channels and I-beams to construct rigid machine bases, structural framing and heavy-duty shopfloor fixtures.',
     highlights: ['Heavy Structural', 'Machine Bases', 'Robust Frames'],
     idealFor: 'Heavy machine chassis, plant structural frames and equipment skids.'
@@ -112,7 +114,7 @@ const SERVICES_DATA = {
     id: 'ms-ducting',
     name: 'MS Ducting Work',
     categoryLabel: 'MS FABRICATION',
-    image: '/images/gallery_assets/sheetmetal_ducts_14.jpg',
+    image: '/images/service_ms_ducting.jpg',
     description: 'Robust mild-steel ducting lines, dust collector ducts and exhaust channels fabricated for factory ventilation, flue gas exhaust and high-volume industrial airflow.',
     highlights: ['Industrial Ducting', 'Plant Ventilation', 'Exhaust Channels'],
     idealFor: 'Factory exhaust lines, dust extraction systems and heavy airflow ducts.'
@@ -139,7 +141,7 @@ const SERVICES_DATA = {
     id: 'ms-powder-coating',
     name: 'Powder Coating',
     categoryLabel: 'MS FABRICATION',
-    image: '/images/gallery_assets/industrial_frame_15.jpg',
+    image: '/images/service_ms_powder_coating.jpg',
     description: 'Industrial electrostatic powder coating and oven curing for mild-steel fabrications, providing long-lasting corrosion protection, impact durability and uniform color finish.',
     highlights: ['Powder Coating', 'Corrosion Resistance', 'Durable Finish'],
     idealFor: 'Machine enclosures, electrical panels, brackets and structural assemblies.'
@@ -157,7 +159,7 @@ const SERVICES_DATA = {
     id: 'ms-ndt',
     name: 'MS 3rd Party NDT Facility',
     categoryLabel: 'MS FABRICATION',
-    image: '/images/precision_metrology_datum.jpg',
+    image: '/images/service_ms_ndt.jpg',
     description: 'Facilitation of third-party NDT quality testing for structural mild-steel weldments, ensuring adherence to industrial quality standards and load-bearing integrity.',
     highlights: ['Weld Inspection', 'NDT Verification', 'Quality Assurance'],
     idealFor: 'Load-bearing frames, crane structures and certified industrial weldments.'
@@ -186,7 +188,7 @@ const SERVICES_DATA = {
     id: 'mach-plano-milling',
     name: 'Plano Milling',
     categoryLabel: 'MACHINING',
-    image: '/images/gallery_assets/structural_frame_08.jpg',
+    image: '/images/service_mach_plano_milling.jpg',
     description: 'Heavy-capacity plano milling for machining oversized component faces, long machine beds, die blocks and large fabrication datum surfaces with high flatness.',
     highlights: ['Large Bed Milling', 'Face Machining', 'Heavy Structures'],
     idealFor: 'Large machine base datum faces, heavy press platens and long slides.'
@@ -195,7 +197,7 @@ const SERVICES_DATA = {
     id: 'mach-vmc-milling',
     name: 'VMC Milling',
     categoryLabel: 'MACHINING',
-    image: '/images/hero_cnc_precision.jpg',
+    image: '/images/service_mach_vmc_milling.jpg',
     description: 'Multi-axis vertical machining center (VMC) CNC milling for complex components requiring high dimensional accuracy, fine surface finishes and consistent batch repeatability.',
     highlights: ['CNC Milling', 'Component Machining', 'Precision Work'],
     idealFor: 'Complex tooling blocks, precision mechanical parts and machined housings.'
@@ -204,7 +206,7 @@ const SERVICES_DATA = {
     id: 'mach-universal-milling',
     name: 'Universal Milling',
     categoryLabel: 'MACHINING',
-    image: '/images/about_workshop_indian.jpg',
+    image: '/images/service_mach_universal_milling.jpg',
     description: 'Flexible universal milling for toolroom operations, keyway cutting, gear slotting, spline milling and custom component modifications with precision setup.',
     highlights: ['Keyway & Slots', 'Toolroom Machining', 'Helical Milling'],
     idealFor: 'Shaft keyways, slotting, toolroom maintenance and one-off mechanical parts.'
@@ -222,7 +224,7 @@ const SERVICES_DATA = {
     id: 'mach-turning',
     name: 'Turning',
     categoryLabel: 'MACHINING',
-    image: '/images/gallery_assets/rotary_airlock_16.jpg',
+    image: '/images/service_mach_turning.jpg',
     description: 'Precision lathe turning, facing, boring and threading operations for cylindrical shafts, rollers, bushings, pins and precision turned assemblies.',
     highlights: ['Lathe Turning', 'Shafts & Pins', 'Precision Threading'],
     idealFor: 'Conveyor rollers, drive shafts, precision bushings and turned fasteners.'
@@ -240,7 +242,7 @@ const SERVICES_DATA = {
     id: 'mach-toolroom-work',
     name: 'Tool-Room Work',
     categoryLabel: 'MACHINING',
-    image: '/images/about_workshop_indian.jpg',
+    image: '/images/service_mach_toolroom_work.jpg',
     description: 'Dedicated toolroom manufacturing services including die modifications, prototype component machining, gauge manufacturing and custom tooling solutions.',
     highlights: ['Custom Tooling', 'Gauge Fabrication', 'Prototype Work'],
     idealFor: 'Tooling rework, prototype development, go/no-go gauges and custom dies.'
@@ -249,7 +251,7 @@ const SERVICES_DATA = {
     id: 'mach-forming',
     name: 'Forming',
     categoryLabel: 'MACHINING',
-    image: '/images/gallery_products/05_hydraulic_press_structure.png',
+    image: '/images/service_mach_forming.jpg',
     description: 'Hydraulic press and bending operations to shape sheet metal and plate sections into accurate channels, angles, curved covers and custom structural profiles.',
     highlights: ['Hydraulic Press', 'Sheet Metal Bending', 'Section Forming'],
     idealFor: 'Custom channel sections, curved panels, heavy enclosures and bent brackets.'
@@ -258,7 +260,7 @@ const SERVICES_DATA = {
     id: 'mach-cylindrical-grinding',
     name: 'Cylindrical Grinding',
     categoryLabel: 'MACHINING',
-    image: '/images/gallery_assets/rotary_airlock_16.jpg',
+    image: '/images/service_mach_cylindrical_grinding.jpg',
     description: 'High-precision outer (OD) and inner (ID) diameter cylindrical grinding to achieve micron-level concentricity, fine surface finishes and strict shaft tolerances.',
     highlights: ['OD/ID Grinding', 'Shaft Finishing', 'Concentricity'],
     idealFor: 'Bearing journals, precision guide pins, spindle components and rollers.'
@@ -296,7 +298,7 @@ const SERVICES_DATA = {
     id: 'conv-magnetic',
     name: 'Magnetic Conveyor',
     categoryLabel: 'CONVEYOR & MATERIAL HANDLING',
-    image: '/images/gallery_products/02_z_magnetic_conveyor.png',
+    image: '/images/service_conv_magnetic.jpg',
     description: 'Specialized magnetic conveyors designed for automatic chip evacuation, scrap metal transit and elevating ferrous components from machining centers.',
     highlights: ['Magnetic Conveying', 'Chip Extraction', 'Scrap Removal'],
     idealFor: 'CNC chip evacuation, stamping scrap handling and ferrous part elevation.'
@@ -344,25 +346,87 @@ const SERVICES_DATA = {
 };
 
 // =========================================================================
+// 5 MAIN SERVICE CATEGORIES DEFINITION
+// =========================================================================
+const CATEGORIES = [
+  {
+    id: 'industrial-fabrication',
+    number: '01',
+    label: 'Industrial Fabrication',
+    shortLabel: 'Fabrication',
+    icon: Factory,
+    defaultServiceId: 'ss-tube-structure',
+    description: 'Heavy structural steel framing, tanks, pressure vessels, stainless ducting and laser-cut metal fabrication.'
+  },
+  {
+    id: 'machining',
+    number: '02',
+    label: 'Machining',
+    shortLabel: 'Machining',
+    icon: Cog,
+    defaultServiceId: 'mach-laser-cutting',
+    description: 'High-precision CNC VMC milling, heavy plano milling, lathe turning, radial drilling and precision grinding.'
+  },
+  {
+    id: 'conveyor-material-handling',
+    number: '03',
+    label: 'Conveyor & Material Handling',
+    shortLabel: 'Conveyors & Handling',
+    icon: Boxes,
+    defaultServiceId: 'conv-belt',
+    description: 'Industrial belt, flat slat, magnetic conveyors, factory transit trolleys and heavy steel storage pallets.'
+  },
+  {
+    id: 'jigs-fixtures',
+    number: '04',
+    label: 'Jigs & Fixtures',
+    shortLabel: 'Jigs & Fixtures',
+    icon: Crosshair,
+    defaultServiceId: 'jigs-fixtures',
+    description: 'Custom manufacturing jigs, welding fixtures and precision clamping systems for repeatable production accuracy.'
+  },
+  {
+    id: 'spm',
+    number: '05',
+    label: 'Special Purpose Machines (SPM)',
+    shortLabel: 'SPM Automation',
+    icon: Cpu,
+    defaultServiceId: 'spm-service',
+    description: 'Tailored industrial special purpose machinery and automated manufacturing stations engineered to order.'
+  }
+];
+
+// Helper to determine which category a service belongs to
+function getCategoryForServiceId(id) {
+  if (!id) return 'industrial-fabrication';
+  if (id.startsWith('ss-') || id.startsWith('ms-')) return 'industrial-fabrication';
+  if (id.startsWith('mach-')) return 'machining';
+  if (id.startsWith('conv-')) return 'conveyor-material-handling';
+  if (id === 'jigs-fixtures') return 'jigs-fixtures';
+  if (id === 'spm-service' || id === 'spm') return 'spm';
+  return 'industrial-fabrication';
+}
+
+// =========================================================================
 // MAIN SERVICES PAGE COMPONENT
 // =========================================================================
 export default function ServicesPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  // Selected single service ID to display on the right (DEFAULT: first item)
+  // Active Main Category (DEFAULT: 01 Industrial Fabrication)
+  const [activeCategory, setActiveCategory] = useState('industrial-fabrication');
+
+  // Selected single service ID to display on the right (DEFAULT: first item of Industrial Fabrication)
   const [selectedServiceId, setSelectedServiceId] = useState('ss-tube-structure');
 
-  // Sidebar expansion states
-  const [openFabrication, setOpenFabrication] = useState(true);
+  // Sub-branch expansion states for sub-levels within the active category
   const [openSS, setOpenSS] = useState(true);
   const [openMS, setOpenMS] = useState(false);
-  const [openMachining, setOpenMachining] = useState(false);
-  const [openMilling, setOpenMilling] = useState(false);
+  const [openMilling, setOpenMilling] = useState(true);
   const [openGrinding, setOpenGrinding] = useState(false);
-  const [openConveyors, setOpenConveyors] = useState(false);
 
-  // Mobile drawer state
+  // Mobile drawer/accordion state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Scroll to top on mount
@@ -370,43 +434,85 @@ export default function ServicesPage() {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
-  // Handle direct deep-linking via query params (?service=... or ?id=...)
+  // Handle direct deep-linking via query params (?category=..., ?service=..., ?id=...)
   useEffect(() => {
+    const catParam = searchParams.get('category');
     const serviceParam = searchParams.get('service');
     const idParam = searchParams.get('id');
 
     if (idParam && SERVICES_DATA[idParam]) {
+      const cat = getCategoryForServiceId(idParam);
+      setActiveCategory(cat);
       setSelectedServiceId(idParam);
-      expandTreeForService(idParam);
+      expandSubBranchesForService(idParam);
     } else if (serviceParam) {
       const match = Object.values(SERVICES_DATA).find(
-        (s) => s.name.toLowerCase() === serviceParam.toLowerCase()
+        (s) => s.name.toLowerCase() === serviceParam.toLowerCase() || s.id.toLowerCase() === serviceParam.toLowerCase()
       );
       if (match) {
+        const cat = getCategoryForServiceId(match.id);
+        setActiveCategory(cat);
         setSelectedServiceId(match.id);
-        expandTreeForService(match.id);
+        expandSubBranchesForService(match.id);
+      } else {
+        // Check if serviceParam matches a category name
+        const catMatch = CATEGORIES.find(
+          (c) => c.label.toLowerCase() === serviceParam.toLowerCase() || c.id.toLowerCase() === serviceParam.toLowerCase()
+        );
+        if (catMatch) {
+          setActiveCategory(catMatch.id);
+          setSelectedServiceId(catMatch.defaultServiceId);
+          expandSubBranchesForService(catMatch.defaultServiceId);
+        }
+      }
+    } else if (catParam) {
+      const catMatch = CATEGORIES.find(
+        (c) => c.id.toLowerCase() === catParam.toLowerCase() || c.label.toLowerCase() === catParam.toLowerCase()
+      );
+      if (catMatch) {
+        setActiveCategory(catMatch.id);
+        setSelectedServiceId(catMatch.defaultServiceId);
+        expandSubBranchesForService(catMatch.defaultServiceId);
       }
     }
   }, [searchParams]);
 
-  // Helper to expand sidebar tree for a given service
-  const expandTreeForService = (id) => {
+  // Helper to expand sub-branch accordions for a service
+  const expandSubBranchesForService = (id) => {
     if (id.startsWith('ss-')) {
-      setOpenFabrication(true);
       setOpenSS(true);
+      setOpenMS(false);
     } else if (id.startsWith('ms-')) {
-      setOpenFabrication(true);
       setOpenMS(true);
     } else if (id.startsWith('mach-')) {
-      setOpenMachining(true);
       if (id.includes('milling')) setOpenMilling(true);
       if (id.includes('grinding')) setOpenGrinding(true);
-    } else if (id.startsWith('conv-')) {
-      setOpenConveyors(true);
     }
   };
 
-  // Handler to select an individual item
+  // Switch Main Category (Show ONLY this category and its sub-services)
+  const handleSelectCategory = (categoryId) => {
+    const targetCat = CATEGORIES.find((c) => c.id === categoryId);
+    if (!targetCat) return;
+
+    setActiveCategory(targetCat.id);
+    setSelectedServiceId(targetCat.defaultServiceId);
+    expandSubBranchesForService(targetCat.defaultServiceId);
+    setMobileMenuOpen(false);
+
+    // Update query params cleanly
+    navigate(`/services?category=${targetCat.id}`, { replace: true });
+
+    // Smooth scroll on mobile
+    if (window.innerWidth < 992) {
+      const anchor = document.getElementById('catalogue-detail-content-area');
+      if (anchor) {
+        anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
+  // Handler to select an individual item within the active category
   const handleSelectService = (id) => {
     setSelectedServiceId(id);
     setMobileMenuOpen(false);
@@ -427,8 +533,9 @@ export default function ServicesPage() {
     });
   };
 
-  // Active service object
-  const currentService = SERVICES_DATA[selectedServiceId] || SERVICES_DATA['ss-tube-structure'];
+  // Active category and service objects
+  const activeCategoryObj = CATEGORIES.find((c) => c.id === activeCategory) || CATEGORIES[0];
+  const currentService = SERVICES_DATA[selectedServiceId] || SERVICES_DATA[activeCategoryObj.defaultServiceId];
 
   return (
     <div className="services-page-root">
@@ -455,19 +562,57 @@ export default function ServicesPage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 2. FULL-WIDTH INDUSTRIAL CATALOGUE: LEFT SIDEBAR + RIGHT DETAIL           */}
+      {/* 2. CATEGORY-BASED MAIN LAYOUT SECTION                                     */}
       {/* ========================================================================= */}
       <section className="services-main-layout-section">
         <div className="services-full-container">
+
+          {/* ----------------------------------------------------------------------- */}
+          {/* CATEGORY SWITCHER TABS: CLEAN HORIZONTAL NAVIGATION (ALL 5 CATEGORIES) */}
+          {/* ----------------------------------------------------------------------- */}
+          <div className="category-switcher-wrapper">
+            <div className="category-switcher-header">
+              <span className="category-switcher-eyebrow">
+                <Layers size={13} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />
+                MAIN SERVICE CATEGORIES
+              </span>
+              <span className="category-count-badge">CATEGORY {activeCategoryObj.number} OF 05</span>
+            </div>
+
+            <div className="category-tabs-bar" role="tablist" aria-label="Service Categories">
+              {CATEGORIES.map((cat) => {
+                const IconComp = cat.icon;
+                const isActive = activeCategory === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    role="tab"
+                    id={`cat-tab-${cat.id}`}
+                    aria-selected={isActive}
+                    onClick={() => handleSelectCategory(cat.id)}
+                    className={`category-tab-button ${isActive ? 'is-active' : ''}`}
+                  >
+                    <span className="tab-num-tag">{cat.number}</span>
+                    <IconComp size={15} className="tab-icon-svg" />
+                    <span className="tab-title-text">{cat.label}</span>
+                    {isActive && <span className="tab-active-pill" />}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
           {/* MOBILE ACCORDION SELECTOR BAR (< 992px) */}
           <div className="mobile-category-bar">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="mobile-category-btn"
+              aria-label="Toggle sub-services menu"
             >
               <div className="mobile-btn-copy">
-                <span className="mobile-btn-tag">CURRENTLY VIEWING:</span>
+                <span className="mobile-btn-tag">
+                  CATEGORY: {activeCategoryObj.label.toUpperCase()}
+                </span>
                 <span className="mobile-btn-title">{currentService.name}</span>
               </div>
               <ChevronDown
@@ -480,445 +625,420 @@ export default function ServicesPage() {
           <div className="services-catalogue-grid">
             
             {/* =================================================================== */}
-            {/* LEFT SIDEBAR: EXPANDABLE INDUSTRIAL SERVICE TREE NAVIGATION         */}
+            {/* LEFT SIDEBAR: ONLY THE SELECTED MAIN SERVICE CATEGORY + SUB-SERVICES*/}
             {/* =================================================================== */}
             <aside className={`services-sidebar-column ${mobileMenuOpen ? 'mobile-visible' : ''}`}>
               <div className="sidebar-container-box">
-                {/* Sidebar Header */}
+                
+                {/* Sidebar Header: Shows ONLY Active Category */}
                 <div className="sidebar-top-bar">
-                  <span className="sidebar-eyebrow">CAPABILITY INDEX</span>
-                  <h3 className="sidebar-title">Our Services</h3>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                    <span className="sidebar-eyebrow">ACTIVE CATEGORY {activeCategoryObj.number}</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    {React.createElement(activeCategoryObj.icon, { size: 18, color: '#ffffff' })}
+                    <h3 className="sidebar-title">{activeCategoryObj.label}</h3>
+                  </div>
                 </div>
 
-                {/* Sidebar Navigation Tree */}
-                <nav className="sidebar-tree-navigation">
+                {/* Sidebar Sub-Services Navigation Tree (ONLY for Active Category) */}
+                <nav className="sidebar-tree-navigation" aria-label={`${activeCategoryObj.label} Sub-Services`}>
 
-                  {/* ---------------- 1. INDUSTRIAL FABRICATION ---------------- */}
-                  <div className="sidebar-tree-group">
-                    <div
-                      className={`tree-group-header ${selectedServiceId.startsWith('ss-') || selectedServiceId.startsWith('ms-') ? 'active-parent' : ''}`}
-                      onClick={() => setOpenFabrication(!openFabrication)}
-                    >
-                      <div className="header-left-col">
-                        <span className="tree-num">01</span>
-                        <Factory size={16} className="tree-icon" />
-                        <span className="tree-text">Industrial Fabrication</span>
-                      </div>
-                      <ChevronDown size={15} className={`tree-chevron ${openFabrication ? 'open' : ''}`} />
-                    </div>
-
-                    {/* EXPANDS TO: SS Fabrication & MS Fabrication ONLY */}
-                    {openFabrication && (
-                      <div className="tree-sub-branches">
-                        
-                        {/* SS FABRICATION */}
-                        <div className="sub-category-group">
-                          <div
-                            className={`sub-category-header ${selectedServiceId.startsWith('ss-') ? 'active-sub' : ''}`}
-                            onClick={() => setOpenSS(!openSS)}
-                          >
+                  {/* ---------------- 1. INDUSTRIAL FABRICATION ONLY ---------------- */}
+                  {activeCategory === 'industrial-fabrication' && (
+                    <div className="active-category-sub-tree">
+                      
+                      {/* SS FABRICATION SUB-BRANCH */}
+                      <div className="sub-category-group">
+                        <div
+                          className={`sub-category-header ${selectedServiceId.startsWith('ss-') ? 'active-sub' : ''}`}
+                          onClick={() => setOpenSS(!openSS)}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
                             <span className="sub-bullet" />
                             <span className="sub-title">SS Fabrication</span>
-                            <ChevronDown size={13} className={`sub-chevron ${openSS ? 'open' : ''}`} />
                           </div>
-
-                          {openSS && (
-                            <div className="leaf-items-list">
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ss-tube-structure' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ss-tube-structure')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>Tube Structure &amp; Channel Angle Fabrication</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ss-ducting' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ss-ducting')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>SS Ducting Fabrication</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ss-tank' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ss-tank')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>SS Tank Fabrication</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ss-pipeline' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ss-pipeline')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>SS Pipeline Fabrication</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ss-polishing' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ss-polishing')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>Polishing &amp; Buffing Work</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ss-passivation' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ss-passivation')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>Passivation &amp; Pickling Work</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ss-ndt' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ss-ndt')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>SS 3rd Party NDT Facility</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ss-glass-blasting' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ss-glass-blasting')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>Glass Blasting</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ss-laser-cutting' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ss-laser-cutting')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>Laser Cutting</span>
-                              </div>
-                            </div>
-                          )}
+                          <ChevronDown size={13} className={`sub-chevron ${openSS ? 'open' : ''}`} />
                         </div>
 
-                        {/* MS FABRICATION */}
-                        <div className="sub-category-group">
-                          <div
-                            className={`sub-category-header ${selectedServiceId.startsWith('ms-') ? 'active-sub' : ''}`}
-                            onClick={() => setOpenMS(!openMS)}
-                          >
+                        {openSS && (
+                          <div className="leaf-items-list">
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ss-tube-structure' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ss-tube-structure')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>Tube Structure &amp; Channel Angle Fabrication</span>
+                            </div>
+
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ss-ducting' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ss-ducting')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>SS Ducting Fabrication</span>
+                            </div>
+
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ss-tank' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ss-tank')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>SS Tank Fabrication</span>
+                            </div>
+
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ss-pipeline' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ss-pipeline')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>SS Pipeline Fabrication</span>
+                            </div>
+
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ss-polishing' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ss-polishing')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>Polishing &amp; Buffing Work</span>
+                            </div>
+
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ss-passivation' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ss-passivation')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>Passivation &amp; Pickling Work</span>
+                            </div>
+
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ss-ndt' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ss-ndt')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>SS 3rd Party NDT Facility</span>
+                            </div>
+
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ss-glass-blasting' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ss-glass-blasting')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>Glass Blasting</span>
+                            </div>
+
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ss-laser-cutting' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ss-laser-cutting')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>Laser Cutting</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* MS FABRICATION SUB-BRANCH */}
+                      <div className="sub-category-group">
+                        <div
+                          className={`sub-category-header ${selectedServiceId.startsWith('ms-') ? 'active-sub' : ''}`}
+                          onClick={() => setOpenMS(!openMS)}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
                             <span className="sub-bullet" />
                             <span className="sub-title">MS Fabrication</span>
-                            <ChevronDown size={13} className={`sub-chevron ${openMS ? 'open' : ''}`} />
                           </div>
+                          <ChevronDown size={13} className={`sub-chevron ${openMS ? 'open' : ''}`} />
+                        </div>
 
-                          {openMS && (
-                            <div className="leaf-items-list">
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ms-tube-channel' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ms-tube-channel')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>Square Tube, Channel &amp; I-Beam Fabrication</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ms-ducting' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ms-ducting')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>MS Ducting Work</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ms-tank' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ms-tank')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>MS Tank Fabrication</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ms-pipeline' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ms-pipeline')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>MS Pipeline Fabrication</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ms-powder-coating' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ms-powder-coating')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>Powder Coating</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ms-sand-blasting' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ms-sand-blasting')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>Sand Blasting &amp; Painting</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ms-ndt' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ms-ndt')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>MS 3rd Party NDT Facility</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'ms-laser-forming' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('ms-laser-forming')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>Laser Cutting &amp; Forming</span>
-                              </div>
+                        {openMS && (
+                          <div className="leaf-items-list">
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ms-tube-channel' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ms-tube-channel')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>Square Tube, Channel &amp; I-Beam Fabrication</span>
                             </div>
-                          )}
-                        </div>
 
-                      </div>
-                    )}
-                  </div>
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ms-ducting' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ms-ducting')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>MS Ducting Work</span>
+                            </div>
 
-                  {/* ---------------- 2. MACHINING ---------------- */}
-                  <div className="sidebar-tree-group">
-                    <div
-                      className={`tree-group-header ${selectedServiceId.startsWith('mach-') ? 'active-parent' : ''}`}
-                      onClick={() => setOpenMachining(!openMachining)}
-                    >
-                      <div className="header-left-col">
-                        <span className="tree-num">02</span>
-                        <Cog size={16} className="tree-icon" />
-                        <span className="tree-text">Machining</span>
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ms-tank' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ms-tank')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>MS Tank Fabrication</span>
+                            </div>
+
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ms-pipeline' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ms-pipeline')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>MS Pipeline Fabrication</span>
+                            </div>
+
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ms-powder-coating' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ms-powder-coating')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>Powder Coating</span>
+                            </div>
+
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ms-sand-blasting' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ms-sand-blasting')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>Sand Blasting &amp; Painting</span>
+                            </div>
+
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ms-ndt' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ms-ndt')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>MS 3rd Party NDT Facility</span>
+                            </div>
+
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'ms-laser-forming' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('ms-laser-forming')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>Laser Cutting &amp; Forming</span>
+                            </div>
+                          </div>
+                        )}
                       </div>
-                      <ChevronDown size={15} className={`tree-chevron ${openMachining ? 'open' : ''}`} />
+
                     </div>
+                  )}
 
-                    {openMachining && (
-                      <div className="tree-sub-branches">
-                        {/* Laser Cutting */}
+                  {/* ---------------- 2. MACHINING ONLY ---------------- */}
+                  {activeCategory === 'machining' && (
+                    <div className="active-category-sub-tree">
+                      
+                      {/* Laser Cutting */}
+                      <div
+                        className={`leaf-item-direct ${selectedServiceId === 'mach-laser-cutting' ? 'is-selected' : ''}`}
+                        onClick={() => handleSelectService('mach-laser-cutting')}
+                      >
+                        <span className="leaf-indicator" />
+                        <span>Laser Cutting</span>
+                      </div>
+
+                      {/* Milling (Expandable -> Plano, VMC, Universal) */}
+                      <div className="sub-category-group">
                         <div
-                          className={`leaf-item-direct ${selectedServiceId === 'mach-laser-cutting' ? 'is-selected' : ''}`}
-                          onClick={() => handleSelectService('mach-laser-cutting')}
+                          className={`sub-category-header ${selectedServiceId.includes('milling') ? 'active-sub' : ''}`}
+                          onClick={() => setOpenMilling(!openMilling)}
                         >
-                          <span className="leaf-indicator" />
-                          <span>Laser Cutting</span>
-                        </div>
-
-                        {/* Milling (Expandable -> Plano, VMC, Universal) */}
-                        <div className="sub-category-group">
-                          <div
-                            className={`sub-category-header ${selectedServiceId.includes('milling') ? 'active-sub' : ''}`}
-                            onClick={() => setOpenMilling(!openMilling)}
-                          >
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
                             <span className="sub-bullet" />
                             <span className="sub-title">Milling</span>
-                            <ChevronDown size={13} className={`sub-chevron ${openMilling ? 'open' : ''}`} />
                           </div>
+                          <ChevronDown size={13} className={`sub-chevron ${openMilling ? 'open' : ''}`} />
+                        </div>
 
-                          {openMilling && (
-                            <div className="leaf-items-list">
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'mach-plano-milling' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('mach-plano-milling')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>Plano Milling</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'mach-vmc-milling' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('mach-vmc-milling')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>VMC Milling</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'mach-universal-milling' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('mach-universal-milling')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>Universal Milling</span>
-                              </div>
+                        {openMilling && (
+                          <div className="leaf-items-list">
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'mach-plano-milling' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('mach-plano-milling')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>Plano Milling</span>
                             </div>
-                          )}
-                        </div>
 
-                        {/* Drilling */}
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'mach-vmc-milling' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('mach-vmc-milling')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>VMC Milling</span>
+                            </div>
+
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'mach-universal-milling' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('mach-universal-milling')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>Universal Milling</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Drilling */}
+                      <div
+                        className={`leaf-item-direct ${selectedServiceId === 'mach-drilling' ? 'is-selected' : ''}`}
+                        onClick={() => handleSelectService('mach-drilling')}
+                      >
+                        <span className="leaf-indicator" />
+                        <span>Drilling</span>
+                      </div>
+
+                      {/* Turning */}
+                      <div
+                        className={`leaf-item-direct ${selectedServiceId === 'mach-turning' ? 'is-selected' : ''}`}
+                        onClick={() => handleSelectService('mach-turning')}
+                      >
+                        <span className="leaf-indicator" />
+                        <span>Turning</span>
+                      </div>
+
+                      {/* Jig-Fixture Work */}
+                      <div
+                        className={`leaf-item-direct ${selectedServiceId === 'mach-jig-fixture-work' ? 'is-selected' : ''}`}
+                        onClick={() => handleSelectService('mach-jig-fixture-work')}
+                      >
+                        <span className="leaf-indicator" />
+                        <span>Jig-Fixture Work</span>
+                      </div>
+
+                      {/* Tool-Room Work */}
+                      <div
+                        className={`leaf-item-direct ${selectedServiceId === 'mach-toolroom-work' ? 'is-selected' : ''}`}
+                        onClick={() => handleSelectService('mach-toolroom-work')}
+                      >
+                        <span className="leaf-indicator" />
+                        <span>Tool-Room Work</span>
+                      </div>
+
+                      {/* Forming */}
+                      <div
+                        className={`leaf-item-direct ${selectedServiceId === 'mach-forming' ? 'is-selected' : ''}`}
+                        onClick={() => handleSelectService('mach-forming')}
+                      >
+                        <span className="leaf-indicator" />
+                        <span>Forming</span>
+                      </div>
+
+                      {/* Grinding & Finishing (Expandable -> Cylindrical, Surface) */}
+                      <div className="sub-category-group">
                         <div
-                          className={`leaf-item-direct ${selectedServiceId === 'mach-drilling' ? 'is-selected' : ''}`}
-                          onClick={() => handleSelectService('mach-drilling')}
+                          className={`sub-category-header ${selectedServiceId.includes('grinding') ? 'active-sub' : ''}`}
+                          onClick={() => setOpenGrinding(!openGrinding)}
                         >
-                          <span className="leaf-indicator" />
-                          <span>Drilling</span>
-                        </div>
-
-                        {/* Turning */}
-                        <div
-                          className={`leaf-item-direct ${selectedServiceId === 'mach-turning' ? 'is-selected' : ''}`}
-                          onClick={() => handleSelectService('mach-turning')}
-                        >
-                          <span className="leaf-indicator" />
-                          <span>Turning</span>
-                        </div>
-
-                        {/* Jig-Fixture Work */}
-                        <div
-                          className={`leaf-item-direct ${selectedServiceId === 'mach-jig-fixture-work' ? 'is-selected' : ''}`}
-                          onClick={() => handleSelectService('mach-jig-fixture-work')}
-                        >
-                          <span className="leaf-indicator" />
-                          <span>Jig-Fixture Work</span>
-                        </div>
-
-                        {/* Tool-Room Work */}
-                        <div
-                          className={`leaf-item-direct ${selectedServiceId === 'mach-toolroom-work' ? 'is-selected' : ''}`}
-                          onClick={() => handleSelectService('mach-toolroom-work')}
-                        >
-                          <span className="leaf-indicator" />
-                          <span>Tool-Room Work</span>
-                        </div>
-
-                        {/* Forming */}
-                        <div
-                          className={`leaf-item-direct ${selectedServiceId === 'mach-forming' ? 'is-selected' : ''}`}
-                          onClick={() => handleSelectService('mach-forming')}
-                        >
-                          <span className="leaf-indicator" />
-                          <span>Forming</span>
-                        </div>
-
-                        {/* Grinding & Finishing (Expandable -> Cylindrical, Surface) */}
-                        <div className="sub-category-group">
-                          <div
-                            className={`sub-category-header ${selectedServiceId.includes('grinding') ? 'active-sub' : ''}`}
-                            onClick={() => setOpenGrinding(!openGrinding)}
-                          >
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
                             <span className="sub-bullet" />
                             <span className="sub-title">Grinding &amp; Finishing</span>
-                            <ChevronDown size={13} className={`sub-chevron ${openGrinding ? 'open' : ''}`} />
                           </div>
+                          <ChevronDown size={13} className={`sub-chevron ${openGrinding ? 'open' : ''}`} />
+                        </div>
 
-                          {openGrinding && (
-                            <div className="leaf-items-list">
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'mach-cylindrical-grinding' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('mach-cylindrical-grinding')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>Cylindrical Grinding</span>
-                              </div>
-
-                              <div
-                                className={`leaf-item ${selectedServiceId === 'mach-surface-grinding' ? 'is-selected' : ''}`}
-                                onClick={() => handleSelectService('mach-surface-grinding')}
-                              >
-                                <span className="leaf-indicator" />
-                                <span>Surface Grinding</span>
-                              </div>
+                        {openGrinding && (
+                          <div className="leaf-items-list">
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'mach-cylindrical-grinding' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('mach-cylindrical-grinding')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>Cylindrical Grinding</span>
                             </div>
-                          )}
-                        </div>
 
+                            <div
+                              className={`leaf-item ${selectedServiceId === 'mach-surface-grinding' ? 'is-selected' : ''}`}
+                              onClick={() => handleSelectService('mach-surface-grinding')}
+                            >
+                              <span className="leaf-indicator" />
+                              <span>Surface Grinding</span>
+                            </div>
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
 
-                  {/* ---------------- 3. CONVEYOR & MATERIAL HANDLING (STANDALONE CATEGORY) ---------------- */}
-                  <div className="sidebar-tree-group">
-                    <div
-                      className={`tree-group-header ${selectedServiceId.startsWith('conv-') ? 'active-parent' : ''}`}
-                      onClick={() => setOpenConveyors(!openConveyors)}
-                    >
-                      <div className="header-left-col">
-                        <span className="tree-num">03</span>
-                        <Boxes size={16} className="tree-icon" />
-                        <span className="tree-text">Conveyor &amp; Material Handling</span>
-                      </div>
-                      <ChevronDown size={15} className={`tree-chevron ${openConveyors ? 'open' : ''}`} />
                     </div>
+                  )}
 
-                    {openConveyors && (
-                      <div className="tree-sub-branches">
-                        <div
-                          className={`leaf-item-direct ${selectedServiceId === 'conv-belt' ? 'is-selected' : ''}`}
-                          onClick={() => handleSelectService('conv-belt')}
-                        >
-                          <span className="leaf-indicator" />
-                          <span>Belt Conveyor</span>
-                        </div>
-
-                        <div
-                          className={`leaf-item-direct ${selectedServiceId === 'conv-flat' ? 'is-selected' : ''}`}
-                          onClick={() => handleSelectService('conv-flat')}
-                        >
-                          <span className="leaf-indicator" />
-                          <span>Flat Conveyor</span>
-                        </div>
-
-                        <div
-                          className={`leaf-item-direct ${selectedServiceId === 'conv-magnetic' ? 'is-selected' : ''}`}
-                          onClick={() => handleSelectService('conv-magnetic')}
-                        >
-                          <span className="leaf-indicator" />
-                          <span>Magnetic Conveyor</span>
-                        </div>
-
-                        <div
-                          className={`leaf-item-direct ${selectedServiceId === 'conv-trolleys' ? 'is-selected' : ''}`}
-                          onClick={() => handleSelectService('conv-trolleys')}
-                        >
-                          <span className="leaf-indicator" />
-                          <span>Industrial Trolleys</span>
-                        </div>
-
-                        <div
-                          className={`leaf-item-direct ${selectedServiceId === 'conv-pallets' ? 'is-selected' : ''}`}
-                          onClick={() => handleSelectService('conv-pallets')}
-                        >
-                          <span className="leaf-indicator" />
-                          <span>Industrial Pallets</span>
-                        </div>
+                  {/* ---------------- 3. CONVEYOR & MATERIAL HANDLING ONLY ---------------- */}
+                  {activeCategory === 'conveyor-material-handling' && (
+                    <div className="active-category-sub-tree">
+                      <div
+                        className={`leaf-item-direct ${selectedServiceId === 'conv-belt' ? 'is-selected' : ''}`}
+                        onClick={() => handleSelectService('conv-belt')}
+                      >
+                        <span className="leaf-indicator" />
+                        <span>Belt Conveyor</span>
                       </div>
-                    )}
-                  </div>
 
-                  {/* ---------------- 4. JIGS & FIXTURES (STANDALONE — NO SUBTYPES) ---------------- */}
-                  <div className="sidebar-tree-group">
-                    <div
-                      className={`tree-group-header standalone-item ${selectedServiceId === 'jigs-fixtures' ? 'is-selected' : ''}`}
-                      onClick={() => handleSelectService('jigs-fixtures')}
-                    >
-                      <div className="header-left-col">
-                        <span className="tree-num">04</span>
-                        <Crosshair size={16} className="tree-icon" />
-                        <span className="tree-text">Jigs &amp; Fixtures</span>
+                      <div
+                        className={`leaf-item-direct ${selectedServiceId === 'conv-flat' ? 'is-selected' : ''}`}
+                        onClick={() => handleSelectService('conv-flat')}
+                      >
+                        <span className="leaf-indicator" />
+                        <span>Flat Conveyor</span>
                       </div>
-                      <ChevronRight size={14} className="tree-standalone-chevron" />
+
+                      <div
+                        className={`leaf-item-direct ${selectedServiceId === 'conv-magnetic' ? 'is-selected' : ''}`}
+                        onClick={() => handleSelectService('conv-magnetic')}
+                      >
+                        <span className="leaf-indicator" />
+                        <span>Magnetic Conveyor</span>
+                      </div>
+
+                      <div
+                        className={`leaf-item-direct ${selectedServiceId === 'conv-trolleys' ? 'is-selected' : ''}`}
+                        onClick={() => handleSelectService('conv-trolleys')}
+                      >
+                        <span className="leaf-indicator" />
+                        <span>Industrial Trolleys</span>
+                      </div>
+
+                      <div
+                        className={`leaf-item-direct ${selectedServiceId === 'conv-pallets' ? 'is-selected' : ''}`}
+                        onClick={() => handleSelectService('conv-pallets')}
+                      >
+                        <span className="leaf-indicator" />
+                        <span>Industrial Pallets</span>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
-                  {/* ---------------- 5. SPECIAL PURPOSE MACHINES (SPM) (STANDALONE — NO SUBTYPES) ---------------- */}
-                  <div className="sidebar-tree-group">
-                    <div
-                      className={`tree-group-header standalone-item ${selectedServiceId === 'spm-service' ? 'is-selected' : ''}`}
-                      onClick={() => handleSelectService('spm-service')}
-                    >
-                      <div className="header-left-col">
-                        <span className="tree-num">05</span>
-                        <Cpu size={16} className="tree-icon" />
-                        <span className="tree-text">Special Purpose Machines (SPM)</span>
+                  {/* ---------------- 4. JIGS & FIXTURES ONLY ---------------- */}
+                  {activeCategory === 'jigs-fixtures' && (
+                    <div className="active-category-sub-tree">
+                      <div
+                        className={`leaf-item-direct ${selectedServiceId === 'jigs-fixtures' ? 'is-selected' : ''}`}
+                        onClick={() => handleSelectService('jigs-fixtures')}
+                      >
+                        <span className="leaf-indicator" />
+                        <span>Jigs &amp; Fixtures (Tooling &amp; Clamping)</span>
                       </div>
-                      <ChevronRight size={14} className="tree-standalone-chevron" />
                     </div>
-                  </div>
+                  )}
+
+                  {/* ---------------- 5. SPECIAL PURPOSE MACHINES (SPM) ONLY ---------------- */}
+                  {activeCategory === 'spm' && (
+                    <div className="active-category-sub-tree">
+                      <div
+                        className={`leaf-item-direct ${selectedServiceId === 'spm-service' ? 'is-selected' : ''}`}
+                        onClick={() => handleSelectService('spm-service')}
+                      >
+                        <span className="leaf-indicator" />
+                        <span>Special Purpose Machines (SPM)</span>
+                      </div>
+                    </div>
+                  )}
 
                 </nav>
+
+                {/* Sidebar Quick Footer info */}
+                <div className="sidebar-quick-footer">
+                  <span className="quick-footer-text">
+                    Select a sub-service above or switch categories using the top tabs.
+                  </span>
+                </div>
 
               </div>
             </aside>
@@ -947,9 +1067,14 @@ export default function ServicesPage() {
                 {/* RIGHT: SERVICE INFORMATION (55%) */}
                 <div className="service-detail-info-col">
                   
-                  {/* 1. Small Category Label */}
-                  <div className="service-category-label">
-                    {currentService.categoryLabel}
+                  {/* 1. Category Tag */}
+                  <div className="service-category-badge-wrap">
+                    <span className="service-category-label">
+                      {activeCategoryObj.label.toUpperCase()}
+                    </span>
+                    <span className="service-sub-badge">
+                      {currentService.categoryLabel}
+                    </span>
                   </div>
 
                   {/* 2. Service Name */}
@@ -957,7 +1082,7 @@ export default function ServicesPage() {
                     {currentService.name}
                   </h2>
 
-                  {/* 3. Short Description (2–3 lines, approx 25–40 words) */}
+                  {/* 3. Short Description (approx 25–40 words) */}
                   <p className="service-description">
                     {currentService.description}
                   </p>
@@ -1103,6 +1228,119 @@ export default function ServicesPage() {
           background-color: #ffffff;
         }
 
+        /* ----------------------------------------------------------------------- */
+        /* CATEGORY SWITCHER TABS STYLING                                          */
+        /* ----------------------------------------------------------------------- */
+        .category-switcher-wrapper {
+          margin-bottom: 24px;
+          background-color: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 6px;
+          padding: 14px 18px;
+          box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
+        }
+
+        .category-switcher-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 12px;
+        }
+
+        .category-switcher-eyebrow {
+          font-family: var(--font-tech);
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          color: #64748b;
+          text-transform: uppercase;
+        }
+
+        .category-count-badge {
+          font-family: var(--font-tech);
+          font-size: 10.5px;
+          font-weight: 700;
+          color: #800e13;
+          background-color: #fee2e2;
+          padding: 3px 8px;
+          border-radius: 3px;
+          letter-spacing: 0.06em;
+        }
+
+        .category-tabs-bar {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 10px;
+        }
+
+        .category-tab-button {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 11px 14px;
+          background-color: #ffffff;
+          border: 1px solid #cbd5e1;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          text-align: left;
+          position: relative;
+          color: #334155;
+        }
+
+        .category-tab-button:hover {
+          border-color: #800e13;
+          color: #800e13;
+          background-color: #fff9f9;
+          transform: translateY(-1px);
+        }
+
+        .category-tab-button.is-active {
+          background-color: #800e13;
+          border-color: #800e13;
+          color: #ffffff;
+          box-shadow: 0 4px 14px rgba(128, 14, 19, 0.22);
+          transform: translateY(-1px);
+        }
+
+        .tab-num-tag {
+          font-family: var(--font-tech);
+          font-size: 10px;
+          font-weight: 800;
+          opacity: 0.75;
+          letter-spacing: 0.05em;
+        }
+
+        .category-tab-button.is-active .tab-num-tag {
+          opacity: 0.9;
+          color: #ffffff;
+        }
+
+        .tab-icon-svg {
+          flex-shrink: 0;
+          color: #64748b;
+          transition: color 0.2s ease;
+        }
+
+        .category-tab-button:hover .tab-icon-svg {
+          color: #800e13;
+        }
+
+        .category-tab-button.is-active .tab-icon-svg {
+          color: #ffffff;
+        }
+
+        .tab-title-text {
+          font-family: var(--font-heading);
+          font-size: 13px;
+          font-weight: 700;
+          line-height: 1.25;
+          letter-spacing: -0.01em;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
         .services-catalogue-grid {
           display: grid;
           grid-template-columns: minmax(280px, 26%) 1fr;
@@ -1126,7 +1364,7 @@ export default function ServicesPage() {
         }
 
         .sidebar-top-bar {
-          padding: 14px 16px 10px;
+          padding: 14px 16px 12px;
           background-color: #0f172a;
           border-bottom: 3px solid #800e13;
         }
@@ -1139,7 +1377,6 @@ export default function ServicesPage() {
           letter-spacing: 0.12em;
           text-transform: uppercase;
           display: block;
-          margin-bottom: 2px;
         }
 
         .sidebar-title {
@@ -1148,6 +1385,7 @@ export default function ServicesPage() {
           font-weight: 800;
           color: #ffffff;
           margin: 0;
+          line-height: 1.2;
         }
 
         .sidebar-tree-navigation {
@@ -1155,136 +1393,46 @@ export default function ServicesPage() {
           flex-direction: column;
         }
 
-        .sidebar-tree-group {
-          border-bottom: 1px solid #f1f5f9;
-          margin: 0;
-          padding: 0;
-        }
-
-        .sidebar-tree-group:last-child {
-          border-bottom: none;
-        }
-
-        .tree-group-header {
+        .active-category-sub-tree {
+          padding: 8px;
           display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 11px 14px;
-          cursor: pointer;
-          background-color: #ffffff;
-          transition: background-color 0.15s ease, border-color 0.15s ease;
-          border-left: 3.5px solid transparent;
-          margin: 0;
+          flex-direction: column;
+          gap: 4px;
         }
 
-        .tree-group-header:hover {
+        .sidebar-quick-footer {
+          padding: 10px 14px;
           background-color: #f8fafc;
+          border-top: 1px solid #f1f5f9;
         }
 
-        .tree-group-header.active-parent {
-          background-color: #fff9f9;
-          border-left: 3.5px solid #800e13;
-        }
-
-        .tree-group-header.standalone-item {
-          cursor: pointer;
-          border-left: 3.5px solid transparent;
-        }
-
-        .tree-group-header.standalone-item:hover {
-          background-color: #f8fafc;
-        }
-
-        .tree-group-header.standalone-item.is-selected {
-          background-color: #800e13;
-          color: #ffffff;
-          border-left: 3.5px solid #0f172a;
-        }
-
-        .tree-group-header.standalone-item.is-selected .tree-num,
-        .tree-group-header.standalone-item.is-selected .tree-icon,
-        .tree-group-header.standalone-item.is-selected .tree-text {
-          color: #ffffff;
-        }
-
-        .tree-standalone-chevron {
-          color: #94a3b8;
-          opacity: 0.6;
-          transition: color 0.15s ease, opacity 0.15s ease;
-        }
-
-        .tree-group-header.standalone-item.is-selected .tree-standalone-chevron {
-          color: #ffffff;
-          opacity: 1;
-        }
-
-        .header-left-col {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          flex: 1;
-        }
-
-        .tree-num {
-          font-family: var(--font-tech);
+        .quick-footer-text {
           font-size: 11px;
-          font-weight: 800;
-          color: #800e13;
-        }
-
-        .tree-icon {
           color: #64748b;
-        }
-
-        .tree-group-header.active-parent .tree-icon {
-          color: #800e13;
-        }
-
-        .tree-text {
-          font-family: var(--font-heading);
-          font-size: 12.5px;
-          font-weight: 700;
-          color: #111827;
-        }
-
-        .tree-group-header.active-parent .tree-text {
-          color: #800e13;
-        }
-
-        .tree-chevron {
-          color: #94a3b8;
-          transition: transform 0.2s ease;
-        }
-
-        .tree-chevron.open {
-          transform: rotate(180deg);
+          line-height: 1.4;
+          display: block;
         }
 
         /* Sub branches */
-        .tree-sub-branches {
-          background-color: #fafbfc;
-          border-top: 1px solid #f1f5f9;
-          padding: 4px 6px 6px 12px;
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
-        }
-
         .sub-category-group {
           margin: 2px 0;
+          border: 1px solid #f1f5f9;
+          border-radius: 4px;
+          overflow: hidden;
+          background-color: #fafbfc;
         }
 
         .sub-category-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 6px 8px;
+          padding: 9px 10px;
           cursor: pointer;
-          border-radius: 3px;
-          font-size: 12px;
+          font-size: 12.5px;
           font-weight: 700;
           color: #334155;
           transition: all 0.15s ease;
+          background-color: #f8fafc;
         }
 
         .sub-category-header:hover {
@@ -1321,31 +1469,32 @@ export default function ServicesPage() {
 
         /* Leaf Items */
         .leaf-items-list {
-          padding-left: 14px;
-          margin: 2px 0 4px;
+          padding: 4px 6px 6px 12px;
           display: flex;
           flex-direction: column;
-          gap: 1px;
+          gap: 2px;
+          background-color: #ffffff;
         }
 
         .leaf-item,
         .leaf-item-direct {
           display: flex;
           align-items: center;
-          gap: 7px;
-          padding: 6px 8px;
-          font-size: 11.5px;
+          gap: 8px;
+          padding: 8px 10px;
+          font-size: 12px;
           color: #475569;
-          font-weight: 500;
-          border-radius: 2px;
+          font-weight: 600;
+          border-radius: 3px;
           cursor: pointer;
           transition: all 0.15s ease;
           line-height: 1.35;
+          border-left: 2px solid transparent;
         }
 
         .leaf-item:hover,
         .leaf-item-direct:hover {
-          background-color: #f1f5f9;
+          background-color: #f8fafc;
           color: #800e13;
         }
 
@@ -1354,6 +1503,7 @@ export default function ServicesPage() {
           background-color: #800e13;
           color: #ffffff;
           font-weight: 700;
+          border-left: 2px solid #0f172a;
         }
 
         .leaf-indicator {
@@ -1438,13 +1588,32 @@ export default function ServicesPage() {
           gap: 14px;
         }
 
-        /* 1. Small Category Label */
+        /* 1. Category Tag */
+        .service-category-badge-wrap {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+
         .service-category-label {
           font-family: var(--font-tech);
           font-size: 11.5px;
           font-weight: 800;
           letter-spacing: 0.14em;
           color: #800e13;
+          text-transform: uppercase;
+        }
+
+        .service-sub-badge {
+          font-family: var(--font-tech);
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          color: #475569;
+          background-color: #f1f5f9;
+          padding: 2px 6px;
+          border-radius: 2px;
           text-transform: uppercase;
         }
 
@@ -1617,7 +1786,17 @@ export default function ServicesPage() {
         /* ========================================================================= */
         /* RESPONSIVE BREAKPOINTS                                                    */
         /* ========================================================================= */
+        @media (max-width: 1200px) {
+          .category-tabs-bar {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+
         @media (max-width: 991px) {
+          .category-tabs-bar {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
           .services-catalogue-grid {
             grid-template-columns: 1fr;
           }
@@ -1657,6 +1836,19 @@ export default function ServicesPage() {
         }
 
         @media (max-width: 640px) {
+          .category-tabs-bar {
+            grid-template-columns: 1fr;
+            gap: 6px;
+          }
+
+          .category-tab-button {
+            padding: 9px 12px;
+          }
+
+          .tab-title-text {
+            font-size: 12.5px;
+          }
+
           .service-title {
             font-size: 21px;
           }
@@ -1668,6 +1860,10 @@ export default function ServicesPage() {
         }
 
         @media (max-width: 480px) {
+          .category-switcher-wrapper {
+            padding: 10px 12px;
+            margin-bottom: 16px;
+          }
           .selected-service-card {
             padding: 16px;
             gap: 16px;
@@ -1689,4 +1885,5 @@ export default function ServicesPage() {
     </div>
   );
 }
+
 
