@@ -22,11 +22,27 @@ function ScrollHandler() {
           const navOffset = 80;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+          if (window.__lenis) {
+            window.__lenis.scrollTo(offsetPosition, { duration: 0.8 });
+          } else {
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+          }
         }
       }, 80);
     } else {
+      // Immediate scroll to top and sync Lenis layout dimensions
       window.scrollTo({ top: 0, behavior: 'instant' });
+      if (window.__lenis) {
+        window.__lenis.scrollTo(0, { immediate: true });
+        window.__lenis.resize();
+      }
+      // Re-check resize after page content mounts
+      setTimeout(() => {
+        if (window.__lenis) {
+          window.__lenis.resize();
+        }
+        window.dispatchEvent(new Event('resize'));
+      }, 100);
     }
   }, [pathname, hash]);
 
@@ -39,6 +55,7 @@ export default function App() {
     // This completely prevents touch momentum fighting, jitter, jumping, and content vibration on mobile
     const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches || window.innerWidth < 992;
     if (isTouchDevice) {
+      window.__lenis = null;
       return;
     }
 
@@ -53,6 +70,8 @@ export default function App() {
       syncTouch: false,
     });
 
+    window.__lenis = lenis;
+
     let rafId;
     function raf(time) {
       lenis.raf(time);
@@ -63,6 +82,7 @@ export default function App() {
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
+      window.__lenis = null;
     };
   }, []);
 

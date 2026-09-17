@@ -18,6 +18,11 @@ export default function Industries() {
   const currentProgressRef = useRef(0);
   const rafIdRef = useRef(null);
 
+  const stageFallbackImagesRef = useRef([]);
+
+  // Dedicated function to redraw current frame on canvas
+  const renderFrameRef = useRef(null);
+
   // 5 Clear Industry Stages based on Mauli Krupa Precision Works capabilities
   const industries = [
     {
@@ -110,23 +115,45 @@ export default function Industries() {
     'STAGE 05 — FULLY EXPLODED'
   ];
 
-  // Preload all 60 dense CAD sequence frames into memory
+  // Preload priority stage keyframe fallbacks and sequence frames into memory
   useEffect(() => {
-    const loadedImages = [];
-    FRAME_PATHS.forEach((path, idx) => {
+    // 1. Preload 5 primary stage fallback images immediately
+    const stageFallbackPaths = [
+      '/images/cad_fixture/fixture_assembled.png',
+      '/images/cad_fixture/part_left_clamps.png',
+      '/images/cad_fixture/part_right_slide.png',
+      '/images/cad_fixture/part_base_plate.png',
+      '/images/cad_fixture/fixture_exploded.png'
+    ];
+    stageFallbackImagesRef.current = stageFallbackPaths.map((path) => {
       const img = new Image();
       img.src = path;
       img.onload = () => {
-        // Render initial frame 0 on load
-        if (idx === 0 && canvasRef.current && currentProgressRef.current <= 0.01) {
-          const ctx = canvasRef.current.getContext('2d');
-          ctx.clearRect(0, 0, 1376, 768);
-          ctx.globalAlpha = 1;
-          ctx.drawImage(img, 0, 0, 1376, 768);
+        if (renderFrameRef.current) {
+          renderFrameRef.current(currentProgressRef.current);
+        }
+      };
+      return img;
+    });
+
+    // 2. Preload 60 dense CAD sequence frames with priority on stage keyframe indices
+    const loadedImages = new Array(TOTAL_FRAMES);
+    const priorityIndices = [0, 15, 30, 45, 59];
+    const allIndices = Array.from({ length: TOTAL_FRAMES }, (_, i) => i);
+    const loadOrder = [...priorityIndices, ...allIndices.filter((i) => !priorityIndices.includes(i))];
+
+    loadOrder.forEach((idx) => {
+      const img = new Image();
+      img.src = FRAME_PATHS[idx];
+      img.onload = () => {
+        loadedImages[idx] = img;
+        if (renderFrameRef.current) {
+          renderFrameRef.current(currentProgressRef.current);
         }
       };
       loadedImages[idx] = img;
     });
+
     imagesRef.current = loadedImages;
   }, []);
 
@@ -134,20 +161,48 @@ export default function Industries() {
   useEffect(() => {
     let isRunning = true;
 
+    const getBestImage = (progressVal) => {
+      const images = imagesRef.current;
+      const floatIndex = progressVal * (TOTAL_FRAMES - 1);
+      const targetIdx = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.round(floatIndex)));
+
+      // 1. Direct exact match
+      if (images && images[targetIdx] && images[targetIdx].complete && images[targetIdx].naturalWidth > 0) {
+        return images[targetIdx];
+      }
+
+      // 2. Nearest loaded sequence frame
+      if (images && images.length > 0) {
+        let bestImg = null;
+        let minDiff = Infinity;
+        for (let i = 0; i < images.length; i++) {
+          const img = images[i];
+          if (img && img.complete && img.naturalWidth > 0) {
+            const diff = Math.abs(i - targetIdx);
+            if (diff < minDiff) {
+              minDiff = diff;
+              bestImg = img;
+            }
+          }
+        }
+        if (bestImg) return bestImg;
+      }
+
+      // 3. Fallback to stage keyframe image
+      const stageIdx = Math.min(4, Math.max(0, Math.floor(progressVal * 5)));
+      const fallbacks = stageFallbackImagesRef.current;
+      if (fallbacks && fallbacks[stageIdx] && fallbacks[stageIdx].complete && fallbacks[stageIdx].naturalWidth > 0) {
+        return fallbacks[stageIdx];
+      }
+
+      return null;
+    };
+
     const renderFrame = (progressVal) => {
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      const images = imagesRef.current;
-      if (!images || images.length === 0) return;
-
-      const floatIndex = progressVal * (TOTAL_FRAMES - 1);
-      const frameIdx = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.round(floatIndex)));
-
-      let imgToDraw = images[frameIdx];
-      if (!imgToDraw || !imgToDraw.complete || imgToDraw.naturalWidth === 0) {
-        imgToDraw = images.find((img) => img && img.complete && img.naturalWidth > 0) || images[0];
-      }
+      const imgToDraw = getBestImage(progressVal);
 
       if (imgToDraw && imgToDraw.complete && imgToDraw.naturalWidth > 0) {
         ctx.clearRect(0, 0, 1376, 768);
@@ -164,6 +219,11 @@ export default function Industries() {
         shadowRef.current.style.opacity = Math.max(0.08, 0.18 - progressVal * 0.06);
       }
     };
+
+    renderFrameRef.current = renderFrame;
+
+    // Render immediately on mount
+    renderFrame(currentProgressRef.current);
 
     const updateLoop = () => {
       if (!isRunning) return;
@@ -189,6 +249,7 @@ export default function Industries() {
 
     return () => {
       isRunning = false;
+      renderFrameRef.current = null;
       if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
     };
   }, []);
@@ -226,10 +287,31 @@ export default function Industries() {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll, { passive: true });
+    
+    // Initial immediate calculation
     handleScroll();
+
+    // Mount checks for post-route layout changes & image stabilization
+    const t1 = setTimeout(handleScroll, 60);
+    const t2 = setTimeout(handleScroll, 200);
+    const t3 = setTimeout(handleScroll, 600);
+
+    // ResizeObserver to automatically detect any layout shifts
+    let ro;
+    if (window.ResizeObserver && sectionRef.current) {
+      ro = new ResizeObserver(() => {
+        handleScroll();
+      });
+      ro.observe(sectionRef.current);
+    }
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      if (ro) ro.disconnect();
     };
   }, [handleScroll]);
 
@@ -249,7 +331,11 @@ export default function Industries() {
       const totalScrollable = sectionRef.current.offsetHeight - window.innerHeight;
       if (totalScrollable > 0) {
         const targetScroll = sectionTop + targetP * totalScrollable;
-        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+        if (window.__lenis) {
+          window.__lenis.scrollTo(targetScroll, { duration: 0.8 });
+        } else {
+          window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+        }
       }
     }
   };
