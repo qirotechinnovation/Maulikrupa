@@ -4,7 +4,7 @@ import { ArrowRight, ChevronDown, Crosshair } from 'lucide-react';
 
 const TOTAL_FRAMES = 60;
 const FRAME_PATHS = Array.from({ length: TOTAL_FRAMES }, (_, i) => 
-  `/images/cad_dense_sequence/frame_${String(i).padStart(2, '0')}.png`
+  `/images/cad_dense_sequence/frame_${String(i).padStart(2, '0')}.webp`
 );
 
 export default function Industries() {
@@ -32,7 +32,7 @@ export default function Industries() {
       subtitle: 'Rolling Stock & Heavy Tooling',
       stageTag: 'Stage 01 — Fully Assembled Machine System',
       statusText: 'ASSEMBLED',
-      image: '/images/cad_fixture/fixture_assembled.png',
+      image: '/images/cad_fixture/fixture_assembled.webp',
       imageAlt: 'Mauli Krupa Precision Works Fully Assembled Machine System',
       description: 'Heavy structural tooling, bogie fabrication fixtures and high-load assemblies built strictly to Indian Railways & defense engineering standards.',
       highlights: [
@@ -48,7 +48,7 @@ export default function Industries() {
       subtitle: 'BIW Fixtures & Assembly Jigs',
       stageTag: 'Stage 02 — Early Component Separation',
       statusText: 'EARLY SEPARATION',
-      image: '/images/cad_fixture/part_left_clamps.png',
+      image: '/images/cad_fixture/part_left_clamps.webp',
       imageAlt: 'Precision Modular Clamping Jigs and BIW Fixture Tooling',
       description: 'Precision Body-In-White (BIW) clamping frames, datum-aligned welding jigs and concentricity inspection gauges for automotive Tier-1 OEMs.',
       highlights: [
@@ -64,7 +64,7 @@ export default function Industries() {
       subtitle: 'Custom Machinery & SPMs',
       stageTag: 'Stage 03 — Partial Sub-Assembly Explosion',
       statusText: 'PARTIAL EXPLOSION',
-      image: '/images/cad_fixture/part_right_slide.png',
+      image: '/images/cad_fixture/part_right_slide.webp',
       imageAlt: 'Linear Actuation, Servo Gantry & Precision Slide Drive',
       description: 'Turnkey Special Purpose Machines (SPMs), automated straightening presses and calibrated fluid test benches built strictly to customer drawings.',
       highlights: [
@@ -80,7 +80,7 @@ export default function Industries() {
       subtitle: 'Fabricated Structures & Machine Beds',
       stageTag: 'Stage 04 — Advanced Disassembly Stage',
       statusText: 'MOSTLY EXPLODED',
-      image: '/images/cad_fixture/part_base_plate.png',
+      image: '/images/cad_fixture/part_base_plate.webp',
       imageAlt: 'Heavy Duty Ground Milled T-Slot Base Bed Structure',
       description: 'Stress-relieved ground base tables, heavy equipment weldments and precision-machined structures built with 400A MIG welding capacity.',
       highlights: [
@@ -96,7 +96,7 @@ export default function Industries() {
       subtitle: 'Material Handling & Conveyors',
       stageTag: 'Stage 05 — Complete Exploded Engineering View',
       statusText: 'FULLY EXPLODED',
-      image: '/images/cad_fixture/fixture_exploded.png',
+      image: '/images/cad_fixture/fixture_exploded.webp',
       imageAlt: 'Complete 3D Exploded Engineering Assembly View',
       description: 'Continuous conveyor networks, magnetic scrap discharge systems and heavy-duty shopfloor transit trolleys built for continuous operations.',
       highlights: [
@@ -119,11 +119,11 @@ export default function Industries() {
   useEffect(() => {
     // 1. Preload 5 primary stage fallback images immediately
     const stageFallbackPaths = [
-      '/images/cad_fixture/fixture_assembled.png',
-      '/images/cad_fixture/part_left_clamps.png',
-      '/images/cad_fixture/part_right_slide.png',
-      '/images/cad_fixture/part_base_plate.png',
-      '/images/cad_fixture/fixture_exploded.png'
+      '/images/cad_fixture/fixture_assembled.webp',
+      '/images/cad_fixture/part_left_clamps.webp',
+      '/images/cad_fixture/part_right_slide.webp',
+      '/images/cad_fixture/part_base_plate.webp',
+      '/images/cad_fixture/fixture_exploded.webp'
     ];
     stageFallbackImagesRef.current = stageFallbackPaths.map((path) => {
       const img = new Image();
@@ -946,6 +946,7 @@ export default function Industries() {
             padding-bottom: 0 !important;
           }
           .industries-sticky-viewport {
+            position: -webkit-sticky !important;
             position: sticky !important;
             top: 0 !important;
             height: 100vh !important;
@@ -957,8 +958,6 @@ export default function Industries() {
             display: flex !important;
             flex-direction: column !important;
             justify-content: space-between !important;
-            will-change: transform !important;
-            contain: paint !important;
           }
           .industries-three-col-layout {
             grid-template-columns: 1fr !important;
