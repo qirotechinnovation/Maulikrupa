@@ -55,6 +55,17 @@ export const GALLERY_ITEMS = [
     specs: ['Heavy MS plate casing (16mm-25mm)', 'Alloy steel crushing rotor shafts', 'Self-aligning heavy spherical roller bearings', 'Reinforced foundation frame skid']
   },
   {
+    id: 'workshop-process-video-01',
+    code: 'MKP-VID-01',
+    title: 'Precision Workshop Fabrication & Machinery in Action',
+    category: 'Machine Structures',
+    video: '/videos/mauli-krupa-gallery-video.mp4',
+    image: '/images/gallery_video_poster.jpg',
+    isVideo: true,
+    description: 'On-site workshop demonstration showcasing precision fabrication, machine structural assembly, and machining operations at Mauli Krupa Precision Works, Bhosari MIDC.',
+    specs: ['Bhosari MIDC Workshop Facility', 'Precision structural steel assembly', 'Multi-axis machining & fabrication in action', 'Verified high-tolerance engineering']
+  },
+  {
     id: 'process-skid-19',
     code: 'MKP-EQP-03',
     title: 'Fluid Process Skid',

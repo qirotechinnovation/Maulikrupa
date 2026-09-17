@@ -8,7 +8,8 @@ import {
   Crosshair,
   CheckCircle2,
   ChevronRight,
-  ChevronLeft
+  ChevronLeft,
+  Play
 } from 'lucide-react';
 import { GALLERY_ITEMS } from '../data/galleryData';
 
@@ -198,7 +199,7 @@ export default function Gallery() {
                 e.currentTarget.style.backgroundColor = '#111827';
               }}
             >
-              <span>Explore All 37 Works</span>
+              <span>Explore All 38 Works</span>
               <ArrowRight size={14} />
             </Link>
 
@@ -294,24 +295,71 @@ export default function Gallery() {
           >
             {/* Image Frame */}
             <div className="home-gallery-frame">
-              <img
-                src={item.image}
-                alt={item.title}
-                loading="lazy"
-                className="home-gallery-img"
-              />
+              {item.isVideo ? (
+                <video
+                  src={item.video}
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="home-gallery-img"
+                  style={{ objectFit: 'cover' }}
+                />
+              ) : (
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  className="home-gallery-img"
+                />
+              )}
+
+              {/* Video Play Badge Indicator */}
+              {item.isVideo && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '50%',
+                    backgroundColor: 'rgba(197, 34, 39, 0.92)',
+                    color: '#ffffff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 4px 18px rgba(0,0,0,0.35)',
+                    zIndex: 2,
+                    pointerEvents: 'none',
+                    transition: 'transform 0.25s ease, background-color 0.2s ease'
+                  }}
+                  className="home-gallery-video-play-btn"
+                >
+                  <Play size={20} fill="#ffffff" color="#ffffff" style={{ marginLeft: '2px' }} />
+                </div>
+              )}
 
               {/* Tag Overlays */}
               <div className="home-gallery-badge-box">
                 <span className="home-gallery-code">{item.code}</span>
-                <span className="home-gallery-cat">{item.category}</span>
+                <span className="home-gallery-cat">{item.isVideo ? 'VIDEO' : item.category}</span>
               </div>
 
               {/* Hover Veil */}
               <div className="home-gallery-hover-veil">
                 <div className="home-gallery-hover-pill">
-                  <Maximize2 size={13} color="#c52227" />
-                  <span>INSPECT SPECIFICATION</span>
+                  {item.isVideo ? (
+                    <>
+                      <Play size={13} fill="#c52227" color="#c52227" />
+                      <span>PLAY WORKSHOP VIDEO</span>
+                    </>
+                  ) : (
+                    <>
+                      <Maximize2 size={13} color="#c52227" />
+                      <span>INSPECT SPECIFICATION</span>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -369,7 +417,7 @@ export default function Gallery() {
             textTransform: 'uppercase'
           }}
         >
-          <span>37 AUTHENTIC WORKSHOP ASSETS AVAILABLE</span>
+          <span>38 AUTHENTIC WORKSHOP ASSETS AVAILABLE</span>
           <span style={{ color: '#c52227', fontWeight: 600 }}>SWIPE / SCROLL HORIZONTALLY TO EXPLORE</span>
           <span>BHOSARI MIDC, PUNE</span>
         </div>
@@ -411,13 +459,33 @@ export default function Gallery() {
 
             {/* Lightbox Body */}
             <div className="gallery-lightbox-body">
-              {/* Image Stage */}
+              {/* Image / Video Stage */}
               <div className="lightbox-image-stage">
-                <img
-                  src={currentItem.image}
-                  alt={currentItem.title}
-                  className="lightbox-img"
-                />
+                {currentItem.isVideo ? (
+                  <video
+                    src={currentItem.video}
+                    poster={currentItem.image}
+                    controls
+                    autoPlay
+                    muted
+                    defaultMuted
+                    playsInline
+                    preload="metadata"
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      borderRadius: '4px',
+                      backgroundColor: '#000000',
+                      boxShadow: '0 8px 30px rgba(0,0,0,0.5)'
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={currentItem.image}
+                    alt={currentItem.title}
+                    className="lightbox-img"
+                  />
+                )}
 
                 <button
                   onClick={handlePrev}
@@ -643,8 +711,21 @@ export default function Gallery() {
         }
 
         @media (max-width: 768px) {
+          #gallery {
+            padding-top: 44px !important;
+            padding-bottom: 40px !important;
+          }
           .home-gallery-card {
-            flex: 0 0 300px;
+            flex: 0 0 280px;
+          }
+        }
+        @media (max-width: 480px) {
+          #gallery {
+            padding-top: 32px !important;
+            padding-bottom: 32px !important;
+          }
+          .home-gallery-card {
+            flex: 0 0 260px;
           }
         }
       `}</style>

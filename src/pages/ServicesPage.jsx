@@ -545,6 +545,16 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       <section className="services-top-hero">
         <div className="top-hero-overlay" />
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '3px',
+            background: 'linear-gradient(to right, #c52227 0%, #e03137 50%, transparent 100%)'
+          }}
+        />
         <div className="services-full-container">
           <div className="top-hero-content">
             <div className="hero-badge-wrap">
@@ -554,9 +564,6 @@ export default function ServicesPage() {
             <h1 className="hero-title">
               SERVICES <span className="hero-title-accent">CATALOGUE</span>
             </h1>
-            <p className="hero-subtitle">
-              Select any capability from the index below to explore our industrial manufacturing and engineering services.
-            </p>
           </div>
         </div>
       </section>
@@ -573,15 +580,13 @@ export default function ServicesPage() {
           <div className="category-switcher-wrapper">
             <div className="category-switcher-header">
               <span className="category-switcher-eyebrow">
-                <Layers size={13} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />
+                <Layers size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />
                 MAIN SERVICE CATEGORIES
               </span>
-              <span className="category-count-badge">CATEGORY {activeCategoryObj.number} OF 05</span>
             </div>
 
             <div className="category-tabs-bar" role="tablist" aria-label="Service Categories">
               {CATEGORIES.map((cat) => {
-                const IconComp = cat.icon;
                 const isActive = activeCategory === cat.id;
                 return (
                   <button
@@ -593,7 +598,6 @@ export default function ServicesPage() {
                     className={`category-tab-button ${isActive ? 'is-active' : ''}`}
                   >
                     <span className="tab-num-tag">{cat.number}</span>
-                    <IconComp size={15} className="tab-icon-svg" />
                     <span className="tab-title-text">{cat.label}</span>
                     {isActive && <span className="tab-active-pill" />}
                   </button>
@@ -632,9 +636,6 @@ export default function ServicesPage() {
                 
                 {/* Sidebar Header: Shows ONLY Active Category */}
                 <div className="sidebar-top-bar">
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-                    <span className="sidebar-eyebrow">ACTIVE CATEGORY {activeCategoryObj.number}</span>
-                  </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     {React.createElement(activeCategoryObj.icon, { size: 18, color: '#ffffff' })}
                     <h3 className="sidebar-title">{activeCategoryObj.label}</h3>
@@ -1155,11 +1156,14 @@ export default function ServicesPage() {
         /* 1. TOP HERO SECTION */
         .services-top-hero {
           position: relative;
-          padding-top: clamp(92px, 8.5vw, 116px);
-          padding-bottom: clamp(24px, 3vw, 36px);
+          min-height: clamp(300px, 25vw, 360px);
+          padding-top: clamp(120px, 13.5vw, 150px);
+          padding-bottom: clamp(65px, 7.5vw, 85px);
+          display: flex;
+          align-items: center;
           background-image: url('/images/hero_welding_fabrication.jpg');
           background-size: cover;
-          background-position: center 30%;
+          background-position: center 38%;
           background-repeat: no-repeat;
           overflow: hidden;
         }
@@ -1181,12 +1185,12 @@ export default function ServicesPage() {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          margin-bottom: 6px;
+          margin-bottom: 14px;
         }
 
         .hero-badge-text {
           font-family: var(--font-tech);
-          font-size: 10.5px;
+          font-size: 11px;
           font-weight: 700;
           letter-spacing: 0.14em;
           color: #f1f5f9;
@@ -1202,29 +1206,22 @@ export default function ServicesPage() {
 
         .hero-title {
           font-family: var(--font-heading);
-          font-size: clamp(26px, 3.2vw, 42px);
+          font-size: clamp(32px, 4.5vw, 52px);
           font-weight: 800;
           line-height: 1.12;
-          letter-spacing: -0.02em;
+          letter-spacing: -0.025em;
           color: #ffffff;
-          margin: 0 0 6px 0;
+          margin: 0;
+          text-transform: uppercase;
         }
 
         .hero-title-accent {
           color: #e03137;
         }
 
-        .hero-subtitle {
-          font-size: clamp(13.5px, 0.95vw, 15px);
-          line-height: 1.5;
-          color: #cbd5e1;
-          margin: 0;
-          max-width: 600px;
-        }
-
         /* 2. SPLIT LAYOUT SECTION */
         .services-main-layout-section {
-          padding: 24px 0 54px;
+          padding: 28px 0 54px;
           background-color: #ffffff;
         }
 
@@ -1249,22 +1246,11 @@ export default function ServicesPage() {
 
         .category-switcher-eyebrow {
           font-family: var(--font-tech);
-          font-size: 11px;
+          font-size: 12px;
           font-weight: 700;
           letter-spacing: 0.1em;
           color: #64748b;
           text-transform: uppercase;
-        }
-
-        .category-count-badge {
-          font-family: var(--font-tech);
-          font-size: 10.5px;
-          font-weight: 700;
-          color: #800e13;
-          background-color: #fee2e2;
-          padding: 3px 8px;
-          border-radius: 3px;
-          letter-spacing: 0.06em;
         }
 
         .category-tabs-bar {
@@ -1277,7 +1263,7 @@ export default function ServicesPage() {
           display: flex;
           align-items: center;
           gap: 8px;
-          padding: 11px 14px;
+          padding: 12px 14px;
           background-color: #ffffff;
           border: 1px solid #cbd5e1;
           border-radius: 4px;
@@ -1305,7 +1291,7 @@ export default function ServicesPage() {
 
         .tab-num-tag {
           font-family: var(--font-tech);
-          font-size: 10px;
+          font-size: 11.5px;
           font-weight: 800;
           opacity: 0.75;
           letter-spacing: 0.05em;
@@ -1316,23 +1302,9 @@ export default function ServicesPage() {
           color: #ffffff;
         }
 
-        .tab-icon-svg {
-          flex-shrink: 0;
-          color: #64748b;
-          transition: color 0.2s ease;
-        }
-
-        .category-tab-button:hover .tab-icon-svg {
-          color: #800e13;
-        }
-
-        .category-tab-button.is-active .tab-icon-svg {
-          color: #ffffff;
-        }
-
         .tab-title-text {
           font-family: var(--font-heading);
-          font-size: 13px;
+          font-size: 14.5px;
           font-weight: 700;
           line-height: 1.25;
           letter-spacing: -0.01em;
@@ -1364,24 +1336,14 @@ export default function ServicesPage() {
         }
 
         .sidebar-top-bar {
-          padding: 14px 16px 12px;
+          padding: 16px 18px;
           background-color: #0f172a;
           border-bottom: 3px solid #800e13;
         }
 
-        .sidebar-eyebrow {
-          font-family: var(--font-tech);
-          font-size: 9.5px;
-          font-weight: 700;
-          color: #e03137;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          display: block;
-        }
-
         .sidebar-title {
           font-family: var(--font-heading);
-          font-size: 14.5px;
+          font-size: 16px;
           font-weight: 800;
           color: #ffffff;
           margin: 0;
@@ -1407,7 +1369,7 @@ export default function ServicesPage() {
         }
 
         .quick-footer-text {
-          font-size: 11px;
+          font-size: 12px;
           color: #64748b;
           line-height: 1.4;
           display: block;
@@ -1426,9 +1388,9 @@ export default function ServicesPage() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 9px 10px;
+          padding: 10px 12px;
           cursor: pointer;
-          font-size: 12.5px;
+          font-size: 14px;
           font-weight: 700;
           color: #334155;
           transition: all 0.15s ease;
@@ -1481,8 +1443,8 @@ export default function ServicesPage() {
           display: flex;
           align-items: center;
           gap: 8px;
-          padding: 8px 10px;
-          font-size: 12px;
+          padding: 9px 12px;
+          font-size: 13.5px;
           color: #475569;
           font-weight: 600;
           border-radius: 3px;
@@ -1598,7 +1560,7 @@ export default function ServicesPage() {
 
         .service-category-label {
           font-family: var(--font-tech);
-          font-size: 11.5px;
+          font-size: 13px;
           font-weight: 800;
           letter-spacing: 0.14em;
           color: #800e13;
@@ -1607,12 +1569,12 @@ export default function ServicesPage() {
 
         .service-sub-badge {
           font-family: var(--font-tech);
-          font-size: 10px;
+          font-size: 11px;
           font-weight: 700;
           letter-spacing: 0.08em;
           color: #475569;
           background-color: #f1f5f9;
-          padding: 2px 6px;
+          padding: 3px 8px;
           border-radius: 2px;
           text-transform: uppercase;
         }
@@ -1620,7 +1582,7 @@ export default function ServicesPage() {
         /* 2. Service Title */
         .service-title {
           font-family: var(--font-heading);
-          font-size: clamp(24px, 2.5vw, 32px);
+          font-size: clamp(26px, 2.8vw, 36px);
           font-weight: 800;
           color: #0f172a;
           margin: 0;
@@ -1630,11 +1592,11 @@ export default function ServicesPage() {
 
         /* 3. Short 1-Sentence Description */
         .service-description {
-          font-size: 15px;
-          line-height: 1.6;
+          font-size: 16.5px;
+          line-height: 1.65;
           color: #475569;
           margin: 0;
-          max-width: 580px;
+          max-width: 600px;
         }
 
         /* 4. Key Highlights Block */
@@ -1647,7 +1609,7 @@ export default function ServicesPage() {
 
         .service-section-eyebrow {
           font-family: var(--font-tech);
-          font-size: 10.5px;
+          font-size: 12px;
           font-weight: 800;
           color: #0f172a;
           letter-spacing: 0.12em;
@@ -1668,7 +1630,7 @@ export default function ServicesPage() {
           display: flex;
           align-items: center;
           gap: 10px;
-          font-size: 14px;
+          font-size: 15px;
           font-weight: 600;
           color: #1e293b;
         }
@@ -1683,16 +1645,16 @@ export default function ServicesPage() {
 
         /* 5. Ideal for Line */
         .service-ideal-for-wrap {
-          font-size: 13.5px;
+          font-size: 14.5px;
           line-height: 1.55;
           margin-top: 2px;
-          padding-top: 4px;
+          padding-top: 6px;
           border-top: 1px dashed #e2e8f0;
         }
 
         .ideal-for-label {
           font-family: var(--font-tech);
-          font-size: 11px;
+          font-size: 12px;
           font-weight: 800;
           color: #0f172a;
           letter-spacing: 0.06em;
@@ -1701,7 +1663,7 @@ export default function ServicesPage() {
         }
 
         .ideal-for-text {
-          font-size: 13.5px;
+          font-size: 14.5px;
           color: #475569;
           font-weight: 500;
         }
@@ -1719,7 +1681,7 @@ export default function ServicesPage() {
           background-color: #800e13;
           color: #ffffff;
           font-family: var(--font-tech);
-          font-size: 13px;
+          font-size: 14px;
           font-weight: 800;
           letter-spacing: 0.08em;
           text-transform: uppercase;
@@ -1788,13 +1750,25 @@ export default function ServicesPage() {
         /* ========================================================================= */
         @media (max-width: 1200px) {
           .category-tabs-bar {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
           }
         }
 
         @media (max-width: 991px) {
           .category-tabs-bar {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+          }
+
+          .category-tab-button {
+            min-width: 0;
+          }
+
+          .tab-title-text {
+            white-space: normal;
+            font-size: 13.5px;
+            line-height: 1.25;
+            word-break: break-word;
           }
 
           .services-catalogue-grid {
@@ -1837,20 +1811,29 @@ export default function ServicesPage() {
 
         @media (max-width: 640px) {
           .category-tabs-bar {
-            grid-template-columns: 1fr;
-            gap: 6px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
           }
 
           .category-tab-button {
-            padding: 9px 12px;
+            padding: 10px 10px;
+            gap: 6px;
+            min-width: 0;
+          }
+
+          .tab-num-tag {
+            font-size: 11px;
           }
 
           .tab-title-text {
             font-size: 12.5px;
+            white-space: normal;
+            line-height: 1.22;
+            word-break: break-word;
           }
 
           .service-title {
-            font-size: 21px;
+            font-size: 23px;
           }
 
           .service-inquire-btn {
@@ -1861,24 +1844,64 @@ export default function ServicesPage() {
 
         @media (max-width: 480px) {
           .category-switcher-wrapper {
-            padding: 10px 12px;
+            padding: 10px 10px;
             margin-bottom: 16px;
+          }
+          .category-tabs-bar {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+          }
+          .category-tab-button {
+            padding: 8px 8px;
+            gap: 5px;
+            min-width: 0;
+          }
+          .tab-num-tag {
+            font-size: 10px;
+          }
+          .tab-title-text {
+            font-size: 11.5px;
+            line-height: 1.2;
+            white-space: normal;
+            word-break: break-word;
           }
           .selected-service-card {
             padding: 16px;
             gap: 16px;
           }
           .detail-image-box {
-            max-height: 230px;
+            max-height: 220px;
           }
           .service-title {
-            font-size: 19px;
+            font-size: 20px;
           }
           .service-description {
-            font-size: 14px;
+            font-size: 14.5px;
+            line-height: 1.55;
           }
           .highlight-item {
-            font-size: 13px;
+            font-size: 13.5px;
+          }
+        }
+
+        @media (max-width: 375px) {
+          .category-switcher-wrapper {
+            padding: 8px 8px;
+          }
+          .category-tabs-bar {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 6px;
+          }
+          .category-tab-button {
+            padding: 7px 6px;
+            gap: 4px;
+          }
+          .tab-num-tag {
+            font-size: 9.5px;
+          }
+          .tab-title-text {
+            font-size: 10.5px;
+            line-height: 1.15;
           }
         }
       `}</style>

@@ -227,7 +227,12 @@ export default function ContactCTA() {
             min-height: auto !important;
           }
           .contact-cta-image-col {
-            min-height: 220px !important;
+            min-height: 180px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .contact-cta-card-grid > div:first-child {
+            padding: 24px 20px !important;
           }
         }
       `}</style>

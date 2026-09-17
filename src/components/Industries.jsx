@@ -9,9 +9,10 @@ const FRAME_PATHS = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
 
 export default function Industries() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRef = useRef(null);
   const canvasRef = useRef(null);
+  const shadowRef = useRef(null);
+  const promptRef = useRef(null);
   const imagesRef = useRef([]);
   const targetProgressRef = useRef(0);
   const currentProgressRef = useRef(0);
@@ -33,7 +34,7 @@ export default function Industries() {
         'Bogie fabrication & structural welding tooling',
         'High-tonnage hydraulic press weldment structures'
       ],
-      targetScroll: 0.05
+      targetScroll: 0.10
     },
     {
       number: '02',
@@ -49,7 +50,7 @@ export default function Industries() {
         'Robotic welding & modular BIW toggle jigs',
         'Concentricity checking & WIP transit racks'
       ],
-      targetScroll: 0.25
+      targetScroll: 0.30
     },
     {
       number: '03',
@@ -81,7 +82,7 @@ export default function Industries() {
         'Precision T-slot machine beds & base tables',
         'Heavy structural tooling & 400A MIG weldments'
       ],
-      targetScroll: 0.75
+      targetScroll: 0.70
     },
     {
       number: '05',
@@ -97,7 +98,7 @@ export default function Industries() {
         'Z-type magnetic & PVC heavy belt conveyors',
         'Multi-tier transit trolleys & material racks'
       ],
-      targetScroll: 0.95
+      targetScroll: 0.90
     }
   ];
 
@@ -129,7 +130,7 @@ export default function Industries() {
     imagesRef.current = loadedImages;
   }, []);
 
-  // Dedicated 60fps RAF loop with continuous sub-frame scrubbing
+  // Dedicated 60fps RAF loop with zero React re-render overhead during continuous scrubbing
   useEffect(() => {
     let isRunning = true;
 
@@ -138,17 +139,29 @@ export default function Industries() {
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
       const images = imagesRef.current;
-      if (!images || images.length !== TOTAL_FRAMES) return;
+      if (!images || images.length === 0) return;
 
       const floatIndex = progressVal * (TOTAL_FRAMES - 1);
       const frameIdx = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.round(floatIndex)));
 
-      const currentImg = images[frameIdx];
+      let imgToDraw = images[frameIdx];
+      if (!imgToDraw || !imgToDraw.complete || imgToDraw.naturalWidth === 0) {
+        imgToDraw = images.find((img) => img && img.complete && img.naturalWidth > 0) || images[0];
+      }
 
-      if (currentImg && currentImg.complete && currentImg.naturalWidth > 0) {
+      if (imgToDraw && imgToDraw.complete && imgToDraw.naturalWidth > 0) {
         ctx.clearRect(0, 0, 1376, 768);
         ctx.globalAlpha = 1;
-        ctx.drawImage(currentImg, 0, 0, 1376, 768);
+        ctx.drawImage(imgToDraw, 0, 0, 1376, 768);
+      }
+
+      // Direct DOM updates for shadow and prompt with zero component re-renders
+      if (promptRef.current) {
+        promptRef.current.style.opacity = Math.max(0, 1 - progressVal * 15);
+      }
+      if (shadowRef.current) {
+        shadowRef.current.style.transform = `scale(${1 + progressVal * 0.10}) translateY(${progressVal * 16}px)`;
+        shadowRef.current.style.opacity = Math.max(0.08, 0.18 - progressVal * 0.06);
       }
     };
 
@@ -160,29 +173,12 @@ export default function Industries() {
       const diff = target - current;
 
       if (Math.abs(diff) > 0.0001) {
-        // Fluid physical dampening (lerp factor: 0.20 for responsive, silky-smooth scrubbing)
-        const next = current + diff * 0.20;
+        // Fluid physical dampening (snappy & responsive scrubbing)
+        const next = current + diff * 0.35;
         currentProgressRef.current = next;
-        setScrollProgress(next);
         renderFrame(next);
-
-        // Smooth milestone sync for right-side description & left directory (no jumping)
-        let newIndex = 0;
-        if (next < 0.20) {
-          newIndex = 0;
-        } else if (next < 0.40) {
-          newIndex = 1;
-        } else if (next < 0.60) {
-          newIndex = 2;
-        } else if (next < 0.80) {
-          newIndex = 3;
-        } else {
-          newIndex = 4;
-        }
-        setActiveIndex((prev) => (prev !== newIndex ? newIndex : prev));
       } else if (current !== target) {
         currentProgressRef.current = target;
-        setScrollProgress(target);
         renderFrame(target);
       }
 
@@ -197,7 +193,7 @@ export default function Industries() {
     };
   }, []);
 
-  // High-performance scroll listener updating normalized target progress
+  // High-performance scroll listener: calculates progress & updates active stage only on boundary change
   const handleScroll = useCallback(() => {
     if (!sectionRef.current) return;
 
@@ -209,31 +205,56 @@ export default function Industries() {
       const currentScroll = -rect.top;
       const progress = Math.min(Math.max(currentScroll / totalScrollable, 0), 1);
       targetProgressRef.current = progress;
+
+      // Infallible scroll-driven stage sync (Stage 01 to Stage 05)
+      let newIdx = 0;
+      if (progress < 0.20) {
+        newIdx = 0;
+      } else if (progress < 0.40) {
+        newIdx = 1;
+      } else if (progress < 0.60) {
+        newIdx = 2;
+      } else if (progress < 0.80) {
+        newIdx = 3;
+      } else {
+        newIdx = 4;
+      }
+      setActiveIndex((prev) => (prev !== newIdx ? newIdx : prev));
     }
   }, []);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, [handleScroll]);
 
-  // Smooth programmatic scroll when clicking any industry in the list or scrubber
-  const scrollToIndustry = (index) => {
-    if (!sectionRef.current) return;
-    const rect = sectionRef.current.getBoundingClientRect();
-    const sectionTop = rect.top + window.scrollY;
-    const windowHeight = window.innerHeight;
-    const totalScrollable = rect.height - windowHeight;
-    const targetP = industries[index].targetScroll;
-    const targetScroll = sectionTop + targetP * totalScrollable;
+  // Programmatic click to jump to exact stage within this section (never redirects or navigates)
+  const handleStageClick = (e, index) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    setActiveIndex(index);
+    const targetP = [0.08, 0.28, 0.48, 0.68, 0.92][index];
+    targetProgressRef.current = targetP;
 
-    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    if (sectionRef.current) {
+      const rect = sectionRef.current.getBoundingClientRect();
+      const sectionTop = window.scrollY + rect.top;
+      const totalScrollable = sectionRef.current.offsetHeight - window.innerHeight;
+      if (totalScrollable > 0) {
+        const targetScroll = sectionTop + targetP * totalScrollable;
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      }
+    }
   };
 
   const activeIndustry = industries[activeIndex];
-  const initialPromptOpacity = Math.max(0, 1 - scrollProgress * 12);
-  const p = scrollProgress;
 
   return (
     <section
@@ -243,7 +264,8 @@ export default function Industries() {
         position: 'relative',
         backgroundColor: '#ffffff',
         color: '#111827',
-        minHeight: '380vh', // Generous runway for intentional, smooth engineering storytelling
+        height: '240vh',
+        minHeight: '240vh',
         borderTop: '1px solid #f1f3f5',
         borderBottom: '1px solid #f1f3f5'
       }}
@@ -390,7 +412,7 @@ export default function Industries() {
                   return (
                     <div
                       key={ind.id}
-                      onClick={() => scrollToIndustry(idx)}
+                      onClick={(e) => handleStageClick(e, idx)}
                       style={{
                         position: 'relative',
                         cursor: 'pointer',
@@ -506,6 +528,7 @@ export default function Industries() {
               >
                 {/* Dynamic Radial Ambient Ground Shadow */}
                 <div
+                  ref={shadowRef}
                   style={{
                     position: 'absolute',
                     bottom: '3%',
@@ -515,9 +538,7 @@ export default function Industries() {
                     background: 'radial-gradient(ellipse at center, rgba(15, 23, 42, 0.16) 0%, rgba(15, 23, 42, 0) 70%)',
                     pointerEvents: 'none',
                     zIndex: 1,
-                    transform: `scale(${1 + p * 0.10}) translateY(${p * 16}px)`,
-                    opacity: Math.max(0.08, 0.18 - p * 0.06),
-                    transition: 'transform 0.05s linear, opacity 0.05s linear'
+                    opacity: 0.14
                   }}
                 />
 
@@ -572,7 +593,8 @@ export default function Industries() {
                       )}
 
                       <button
-                        onClick={() => scrollToIndustry(idx)}
+                        type="button"
+                        onClick={(e) => handleStageClick(e, idx)}
                         style={{
                           display: 'inline-flex',
                           alignItems: 'center',
@@ -612,6 +634,7 @@ export default function Industries() {
 
               {/* Initial "Scroll to Explore" Prompt (Smoothly fades out on initial scroll) */}
               <div
+                ref={promptRef}
                 style={{
                   position: 'absolute',
                   bottom: '-28px',
@@ -624,7 +647,6 @@ export default function Industries() {
                   letterSpacing: '0.14em',
                   color: '#c52227',
                   textTransform: 'uppercase',
-                  opacity: initialPromptOpacity,
                   pointerEvents: 'none',
                   transition: 'opacity 0.25s ease'
                 }}
@@ -831,36 +853,65 @@ export default function Industries() {
         }
 
         @media (max-width: 992px) {
+          #industries {
+            min-height: 220vh !important;
+            height: 220vh !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+          }
           .industries-sticky-viewport {
+            position: sticky !important;
+            top: 0 !important;
             height: 100vh !important;
-            height: 100dvh !important;
-            padding: clamp(12px, 2vh, 20px) 0 !important;
+            height: 100svh !important;
+            max-height: 100vh !important;
+            max-height: 100svh !important;
+            padding: clamp(10px, 1.8vh, 18px) 0 clamp(6px, 1.2vh, 12px) 0 !important;
+            overflow: hidden !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            will-change: transform !important;
+            contain: paint !important;
           }
           .industries-three-col-layout {
             grid-template-columns: 1fr !important;
-            gap: 14px !important;
+            gap: 6px !important;
           }
           .left-industry-nav {
             display: none !important;
           }
           .main-engineering-canvas {
-            height: clamp(200px, 32vh, 320px) !important;
+            height: clamp(140px, 24vh, 195px) !important;
+            width: min(100%, 400px) !important;
+            margin: 0 auto !important;
           }
           .right-industry-detail {
             min-height: auto !important;
             text-align: center !important;
             align-items: center !important;
           }
+          .right-industry-detail > div:nth-child(2) {
+            min-height: 135px !important;
+            width: 100% !important;
+          }
           .right-industry-detail h3 {
-            font-size: 19px !important;
+            font-size: 16px !important;
+            margin-bottom: 2px !important;
           }
           .right-industry-detail p {
-            font-size: 13px !important;
-            margin-bottom: 10px !important;
-            max-width: 480px !important;
+            font-size: 12px !important;
+            line-height: 1.4 !important;
+            margin-bottom: 6px !important;
+            max-width: 440px !important;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
           }
           .industries-stage-progress-bar {
-            margin-top: 6px !important;
+            margin-top: 4px !important;
+            gap: 6px !important;
           }
         }
 
@@ -871,9 +922,27 @@ export default function Industries() {
           }
           .industries-bottom-status-row {
             justify-content: center !important;
+            padding-top: 6px !important;
           }
           .status-center-tag {
-            font-size: 10px !important;
+            font-size: 9.5px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          #industries {
+            min-height: 200vh !important;
+            height: 200vh !important;
+          }
+          .main-engineering-canvas {
+            height: clamp(125px, 21vh, 170px) !important;
+          }
+          .right-industry-detail h3 {
+            font-size: 15px !important;
+          }
+          .right-industry-detail p {
+            font-size: 11.5px !important;
+            line-height: 1.35 !important;
           }
         }
       `}</style>

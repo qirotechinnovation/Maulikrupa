@@ -555,12 +555,22 @@ export default function QualityPrecision() {
         }
 
         @media (max-width: 960px) {
+          #standards {
+            padding-top: 44px !important;
+            padding-bottom: 44px !important;
+          }
           .microscope-grid-layout {
             grid-template-columns: 1fr !important;
-            gap: 28px !important;
+            gap: 24px !important;
           }
           .left-standards-col, .right-standards-col {
-            gap: 24px !important;
+            gap: 20px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          #standards {
+            padding-top: 32px !important;
+            padding-bottom: 32px !important;
           }
         }
       `}</style>

@@ -17,13 +17,44 @@ export default function StartProject() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+    try {
+      const payload = {
+        name: formData.name.trim(),
+        company: formData.company.trim() || 'N/A',
+        phone: formData.phone.trim(),
+        email: formData.email.trim(),
+        message: formData.requirement.trim(),
+        _subject: 'New Website Enquiry - Mauli Krupa Precision Works',
+        _template: 'table',
+        _captcha: 'false',
+        _replyto: formData.email.trim()
+      };
+
+      const response = await fetch('https://formsubmit.co/ajax/smauli.krupa@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+      if (response.ok && (result.success === 'true' || result.success === true || result.message)) {
+        setIsSubmitting(false);
+        setSubmitted(true);
+        setFormData({ name: '', company: '', email: '', phone: '', requirement: '' });
+      } else {
+        throw new Error(result.message || 'Submission failed');
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
       setIsSubmitting(false);
-      setSubmitted(true);
-    }, 600);
+      alert('Unable to send inquiry right now. Please call +91 9370741361 or try again.');
+    }
   };
 
   return (

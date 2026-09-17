@@ -35,7 +35,13 @@ function ScrollHandler() {
 
 export default function App() {
   useEffect(() => {
-    // Initialize Lenis Smooth Scrolling
+    // Only initialize Lenis smooth scrolling on desktop devices with mouse/pointer
+    // This completely prevents touch momentum fighting, jitter, jumping, and content vibration on mobile
+    const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches || window.innerWidth < 992;
+    if (isTouchDevice) {
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -43,15 +49,19 @@ export default function App() {
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 0.9,
+      touchMultiplier: 0,
+      syncTouch: false,
     });
 
+    let rafId;
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   }, []);

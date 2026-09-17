@@ -7,22 +7,21 @@ import { Award, ShieldCheck, ChevronRight } from 'lucide-react';
 export default function Footer() {
   const navigate = useNavigate();
 
-  // Navigation links in requested site order: HOME -> ABOUT US -> SERVICES -> GALLERY -> CONTACT US
+  // Navigation links in requested site order: Home -> About Us -> Services -> Gallery -> Contact Us
   const navLinks = [
-    { label: 'HOME', path: '/' },
-    { label: 'ABOUT US', path: '/about' },
-    { label: 'SERVICES', path: '/services' },
-    { label: 'GALLERY', path: '/gallery' },
-    { label: 'CONTACT US', path: '/contact' },
+    { label: 'Home', path: '/' },
+    { label: 'About Us', path: '/about' },
+    { label: 'Services', path: '/services' },
+    { label: 'Gallery', path: '/gallery' },
+    { label: 'Contact Us', path: '/contact' },
   ];
 
   const serviceLinks = [
-    { label: 'Jigs & Fixtures Tooling', path: '/services' },
-    { label: 'Conveyors & Material Handling', path: '/services' },
-    { label: 'Industrial Transit Trolleys', path: '/services' },
-    { label: 'Heavy Steel Fabrication', path: '/services' },
-    { label: 'Custom Machines & SPMs', path: '/services' },
-    { label: 'Buffing & Pickling Facility', path: '/services' }
+    { label: 'Jigs & Fixtures', path: '/services?category=jigs-fixtures' },
+    { label: 'Conveyors & Material Handling', path: '/services?category=conveyor-material-handling' },
+    { label: 'Industrial Fabrication', path: '/services?category=industrial-fabrication' },
+    { label: 'Machining', path: '/services?category=machining' },
+    { label: 'Special Purpose Machines (SPM)', path: '/services?category=spm' }
   ];
 
   const handleLinkClick = (e, path) => {
@@ -99,8 +98,7 @@ export default function Footer() {
                   fontSize: '12.5px',
                   fontWeight: 700,
                   color: '#ffffff',
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
                   marginBottom: '16px'
                 }}
               >
@@ -142,8 +140,7 @@ export default function Footer() {
                   fontSize: '12.5px',
                   fontWeight: 700,
                   color: '#ffffff',
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
                   marginBottom: '16px'
                 }}
               >
@@ -158,6 +155,8 @@ export default function Footer() {
                       style={{
                         fontSize: '13px',
                         color: '#94a3b8',
+                        fontFamily: 'var(--font-tech)',
+                        letterSpacing: '0.04em',
                         transition: 'color 0.2s ease',
                         display: 'inline-flex',
                         alignItems: 'center',
@@ -179,16 +178,15 @@ export default function Footer() {
             <div style={{ gridColumn: 'span 3' }} className="footer-col-4">
               <div 
                 style={{
-                  fontFamily: 'var(--font-heading)',
+                  fontFamily: 'var(--font-tech)',
                   fontSize: '12.5px',
                   fontWeight: 700,
                   color: '#ffffff',
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
                   marginBottom: '16px'
                 }}
               >
-                ADDRESS
+                Address
               </div>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>

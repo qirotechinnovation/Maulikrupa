@@ -37,32 +37,68 @@ export default function OurImpact() {
     }
   ];
 
-  // Viewport IntersectionObserver — Activates on viewport entry, resets on exit to replay on scroll back
+  // Viewport IntersectionObserver & Scroll Trigger — Resets on leave and replays on every re-entry
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        } else {
-          // Reset when scrolled out of view so animation replays upon return
-          setIsVisible(false);
-          setCounts([0, 0, 0]);
-        }
-      },
-      { threshold: 0.25 }
-    );
-
     const el = sectionRef.current;
-    if (el) {
-      observer.observe(el);
-    }
+    if (!el) return;
+
+    let inView = false;
+
+    const handleIntersect = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (!inView) {
+            inView = true;
+            setIsVisible(true);
+          }
+        } else {
+          if (inView) {
+            inView = false;
+            setIsVisible(false);
+            setCounts([0, 0, 0]);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -20px 0px'
+    });
+
+    observer.observe(el);
+
+    // Scroll & resize check to guarantee synchronization on fast scrolls & mobile
+    const handleScrollCheck = () => {
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const isCurrentlyInView = rect.top < viewportHeight * 0.90 && rect.bottom > viewportHeight * 0.10;
+
+      if (isCurrentlyInView && !inView) {
+        inView = true;
+        setIsVisible(true);
+      } else if (!isCurrentlyInView && inView) {
+        inView = false;
+        setIsVisible(false);
+        setCounts([0, 0, 0]);
+      }
+    };
+
+    window.addEventListener('scroll', handleScrollCheck, { passive: true });
+    window.addEventListener('resize', handleScrollCheck, { passive: true });
+
+    // Initial check
+    handleScrollCheck();
 
     return () => {
-      if (el) observer.unobserve(el);
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScrollCheck);
+      window.removeEventListener('resize', handleScrollCheck);
     };
   }, []);
 
-  // Smooth, ease-out count-up animation with staggered start
+  // Smooth, ease-out count-up animation with staggered start (re-runs every time isVisible becomes true)
   useEffect(() => {
     if (!isVisible) {
       setCounts([0, 0, 0]);
@@ -70,7 +106,7 @@ export default function OurImpact() {
     }
 
     let animationFrameId;
-    const duration = 1800; // ms
+    const duration = 1600; // ms
     const startTime = performance.now();
 
     const animate = (currentTime) => {
@@ -79,7 +115,7 @@ export default function OurImpact() {
       const newCounts = metrics.map((m) => {
         const elapsed = Math.max(0, elapsedTotal - m.delay);
         const progress = Math.min(elapsed / (duration - m.delay), 1);
-        // Smooth ease-out cubic (slows down naturally towards the end)
+        // Smooth ease-out cubic
         const ease = 1 - Math.pow(1 - progress, 3);
         const currentVal = Math.round(ease * m.target);
         return Math.min(currentVal, m.target);
@@ -90,7 +126,7 @@ export default function OurImpact() {
       if (elapsedTotal < duration + 200) {
         animationFrameId = requestAnimationFrame(animate);
       } else {
-        // Stop exactly at final values
+        // Stop exactly at final target values
         setCounts(metrics.map((m) => m.target));
       }
     };
@@ -102,11 +138,11 @@ export default function OurImpact() {
     };
   }, [isVisible]);
 
-  // Formats numbers cleanly: 50+ (adds + on finish), 05 (preserves leading zero), 10+ (adds + on finish)
+  // Formats numbers cleanly: 0 -> 50+, 00 -> 05, 0 -> 10+
   const formatNumber = (metric, index) => {
     const val = counts[index];
     if (metric.padZero) {
-      return val < 10 ? `0${val}` : `${val}`;
+      return String(val).padStart(2, '0');
     }
     const isFinished = val >= metric.target;
     return isFinished ? `${val}${metric.suffix}` : `${val}`;
@@ -553,8 +589,12 @@ export default function OurImpact() {
         }
 
         @media (max-width: 900px) {
+          #impact {
+            padding: 44px 0 !important;
+          }
           .impact-top-tier {
             grid-template-columns: 1fr 1fr !important;
+            margin-bottom: 28px !important;
           }
           .impact-top-tier > div:first-child {
             grid-column: span 1 !important;
@@ -565,6 +605,7 @@ export default function OurImpact() {
           }
           .impact-lower-tier {
             grid-template-columns: 1fr 1fr !important;
+            padding-top: 8px !important;
           }
           .impact-visual-frame {
             grid-column: span 1 !important;
@@ -576,10 +617,13 @@ export default function OurImpact() {
         }
 
         @media (max-width: 640px) {
+          #impact {
+            padding: 36px 0 !important;
+          }
           .impact-top-tier {
             grid-template-columns: 1fr !important;
-            row-gap: 32px !important;
-            margin-bottom: 36px !important;
+            row-gap: 24px !important;
+            margin-bottom: 24px !important;
           }
           .impact-top-tier > div:first-child,
           .impact-top-tier > div:nth-child(2) {
@@ -587,7 +631,7 @@ export default function OurImpact() {
           }
           .impact-lower-tier {
             grid-template-columns: 1fr !important;
-            row-gap: 28px !important;
+            row-gap: 20px !important;
           }
           .impact-visual-frame,
           .impact-lower-tier > div:last-child {

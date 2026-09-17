@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, ChevronLeft, ArrowRight, X } from 'lucide-react';
+import { ChevronRight, ChevronLeft, ArrowRight, X, Play } from 'lucide-react';
 import { GALLERY_CATEGORIES, GALLERY_ITEMS } from '../data/galleryData';
 
 export default function GalleryPage() {
@@ -257,20 +257,62 @@ export default function GalleryPage() {
                 >
                   {/* Strict 1:1 Aspect Ratio Box */}
                   <div className="gallery-card-viewport">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      loading="lazy"
-                      className="gallery-card-img"
-                      style={{ objectPosition: item.objectPosition || 'center' }}
-                    />
+                    {item.isVideo ? (
+                      <video
+                        src={item.video}
+                        muted
+                        playsInline
+                        preload="metadata"
+                        className="gallery-card-img"
+                        style={{ objectFit: 'cover' }}
+                      />
+                    ) : (
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        loading="lazy"
+                        className="gallery-card-img"
+                        style={{ objectPosition: item.objectPosition || 'center' }}
+                      />
+                    )}
+
+                    {/* Play Badge on Video Cards */}
+                    {item.isVideo && (
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '50%',
+                          left: '50%',
+                          transform: 'translate(-50%, -50%)',
+                          width: '52px',
+                          height: '52px',
+                          borderRadius: '50%',
+                          backgroundColor: 'rgba(197, 34, 39, 0.92)',
+                          color: '#ffffff',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          boxShadow: '0 4px 20px rgba(0,0,0,0.38)',
+                          zIndex: 3,
+                          pointerEvents: 'none',
+                          transition: 'transform 0.25s ease, background-color 0.2s ease'
+                        }}
+                        className="gallery-video-play-indicator"
+                      >
+                        <Play size={22} fill="#ffffff" color="#ffffff" style={{ marginLeft: '2px' }} />
+                      </div>
+                    )}
 
                     {/* Reference-Style Partial Bottom Overlay (Occupies lower 40-45% of card) */}
                     <div className="gallery-partial-bottom-overlay">
                       <div className="gallery-overlay-inner">
                         <span className="gallery-overlay-title">{item.title}</span>
                         <div className="gallery-overlay-arrow">
-                          <ArrowRight size={15} color="#ffffff" />
+                          {item.isVideo ? (
+                            <Play size={15} fill="#ffffff" color="#ffffff" />
+                          ) : (
+                            <ArrowRight size={15} color="#ffffff" />
+                          )}
                         </div>
                       </div>
                     </div>
@@ -306,11 +348,31 @@ export default function GalleryPage() {
 
             {/* Lightbox Main Stage */}
             <div className="gallery-lightbox-stage">
-              <img
-                src={currentItem.image}
-                alt={currentItem.title}
-                className="gallery-lightbox-photo"
-              />
+              {currentItem.isVideo ? (
+                <video
+                  src={currentItem.video}
+                  poster={currentItem.image}
+                  controls
+                  autoPlay
+                  muted
+                  defaultMuted
+                  playsInline
+                  preload="metadata"
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '80vh',
+                    borderRadius: '4px',
+                    backgroundColor: '#000000',
+                    boxShadow: '0 8px 30px rgba(0,0,0,0.5)'
+                  }}
+                />
+              ) : (
+                <img
+                  src={currentItem.image}
+                  alt={currentItem.title}
+                  className="gallery-lightbox-photo"
+                />
+              )}
 
               {/* Prev / Next Navigation Arrows */}
               <button
@@ -353,7 +415,7 @@ export default function GalleryPage() {
         /* 1:1 Square Uniform Grid (Desktop: 4 Columns) */
         .gallery-uniform-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(4, minmax(0, 1fr));
           gap: 24px;
         }
 
@@ -365,6 +427,7 @@ export default function GalleryPage() {
           border: 1px solid #e2e8f0;
           box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
           transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+          min-width: 0;
         }
 
         .gallery-uniform-card:hover {
@@ -408,7 +471,7 @@ export default function GalleryPage() {
           left: 0;
           right: 0;
           height: 42%;
-          min-height: 60px;
+          min-height: 48px;
           background: linear-gradient(to top, rgba(175, 22, 27, 0.97) 0%, rgba(197, 34, 39, 0.92) 100%);
           display: flex;
           align-items: center;
@@ -430,7 +493,8 @@ export default function GalleryPage() {
           align-items: center;
           justify-content: space-between;
           width: 100%;
-          gap: 10px;
+          gap: 8px;
+          min-width: 0;
         }
 
         .gallery-overlay-title {
@@ -444,6 +508,7 @@ export default function GalleryPage() {
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
+          min-width: 0;
         }
 
         .gallery-overlay-arrow {
@@ -600,26 +665,43 @@ export default function GalleryPage() {
         /* Responsive Breakpoints */
         @media (max-width: 1100px) {
           .gallery-uniform-grid {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 20px;
           }
         }
 
         @media (max-width: 768px) {
+          #gallery-hero-banner {
+            padding-top: calc(var(--nav-height, 70px) + 24px) !important;
+            padding-bottom: 32px !important;
+          }
+          .gallery-filter-container {
+            margin-bottom: 24px !important;
+            gap: 8px !important;
+          }
+          .gallery-filter-btn {
+            padding: 7px 13px !important;
+            font-size: 12px !important;
+          }
           .gallery-uniform-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 12px !important;
           }
           .gallery-overlay-title {
-            font-size: 12.5px;
+            font-size: 12px;
           }
           .gallery-partial-bottom-overlay {
-            padding: 0 12px;
+            padding: 0 10px;
             height: 46%;
+            min-height: 42px;
           }
           .gallery-overlay-arrow {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
+          }
+          .gallery-video-play-indicator {
+            width: 44px !important;
+            height: 44px !important;
           }
           .gallery-lightbox-nav {
             width: 38px;
@@ -634,20 +716,34 @@ export default function GalleryPage() {
         }
 
         @media (max-width: 480px) {
+          .gallery-filter-container {
+            margin-bottom: 18px !important;
+            gap: 6px !important;
+          }
+          .gallery-filter-btn {
+            padding: 6px 10px !important;
+            font-size: 11.5px !important;
+          }
           .gallery-uniform-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 10px !important;
           }
           .gallery-overlay-title {
-            font-size: 11px;
+            font-size: 10.5px;
             -webkit-line-clamp: 2;
+            line-height: 1.2;
           }
           .gallery-partial-bottom-overlay {
-            padding: 0 8px;
-            height: 50%;
+            padding: 0 6px;
+            height: 48%;
+            min-height: 36px;
           }
           .gallery-overlay-arrow {
             display: none;
+          }
+          .gallery-video-play-indicator {
+            width: 38px !important;
+            height: 38px !important;
           }
           .gallery-lightbox-photo {
             max-height: 60vh;
@@ -659,13 +755,23 @@ export default function GalleryPage() {
           }
         }
 
-        @media (max-width: 360px) {
+        @media (max-width: 375px) {
           .gallery-uniform-grid {
-            grid-template-columns: 1fr;
-            gap: 16px;
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 8px !important;
           }
-          .gallery-overlay-arrow {
-            display: flex;
+          .gallery-overlay-title {
+            font-size: 10px;
+            line-height: 1.15;
+          }
+          .gallery-partial-bottom-overlay {
+            padding: 0 5px;
+            height: 50%;
+            min-height: 34px;
+          }
+          .gallery-video-play-indicator {
+            width: 34px !important;
+            height: 34px !important;
           }
         }
       `}</style>

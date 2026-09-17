@@ -190,11 +190,16 @@ export default function Hero() {
 
       <style>{`
         @media (max-width: 768px) {
+          #home {
+            min-height: auto !important;
+            padding-top: calc(var(--nav-height, 70px) + 24px) !important;
+            padding-bottom: 40px !important;
+          }
           .hero-slide-indicators {
             position: relative !important;
             bottom: auto !important;
             right: auto !important;
-            margin-top: 36px !important;
+            margin-top: 24px !important;
           }
         }
       `}</style>

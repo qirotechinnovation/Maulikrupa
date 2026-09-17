@@ -41,7 +41,7 @@ export default function AboutPage() {
       step: '04',
       title: 'DELIVER',
       desc: 'The completed solution is verified, surface finished with in-house buffing or chemical pickling, and prepared for seamless industrial shopfloor integration.',
-      image: '/images/real_products_curated/05_hydraulic_press_structure.jpg',
+      image: '/images/real_products_curated/04_pneumatic_lifting_tackle.jpg',
       label: 'FINAL INSPECTION & SHOPFLOOR DELIVERY'
     }
   ];
@@ -88,11 +88,11 @@ export default function AboutPage() {
         id="about-hero"
         style={{
           position: 'relative',
-          minHeight: 'clamp(580px, 80vh, 760px)',
+          minHeight: 'clamp(460px, 70vh, 680px)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: 'clamp(90px, 12vh, 130px) 0 clamp(60px, 8vh, 90px) 0',
+          padding: 'clamp(70px, 10vh, 110px) 0 clamp(44px, 6vh, 70px) 0',
           backgroundColor: '#0a1128',
           overflow: 'hidden'
         }}
@@ -215,8 +215,8 @@ export default function AboutPage() {
       <section
         id="our-story"
         style={{
-          paddingTop: 'clamp(80px, 10vw, 130px)',
-          paddingBottom: 'clamp(80px, 10vw, 130px)',
+          paddingTop: 'clamp(54px, 7vw, 90px)',
+          paddingBottom: 'clamp(36px, 4.5vw, 60px)',
           backgroundColor: '#ffffff'
         }}
       >
@@ -401,8 +401,8 @@ export default function AboutPage() {
       <section
         id="how-we-work"
         style={{
-          paddingTop: 'clamp(80px, 10vw, 130px)',
-          paddingBottom: 'clamp(80px, 10vw, 130px)',
+          paddingTop: 'clamp(44px, 5.5vw, 72px)',
+          paddingBottom: 'clamp(54px, 7vw, 90px)',
           backgroundColor: '#fafbfc',
           borderTop: '1px solid #e5e7eb',
           borderBottom: '1px solid #e5e7eb'
@@ -411,7 +411,7 @@ export default function AboutPage() {
         <div className="container-custom">
           
           {/* Section Header */}
-          <div style={{ maxWidth: '720px', marginBottom: 'clamp(48px, 6vw, 76px)' }}>
+          <div style={{ maxWidth: '720px', marginBottom: 'clamp(32px, 4vw, 50px)' }}>
             <div
               style={{
                 display: 'inline-flex',
@@ -631,8 +631,8 @@ export default function AboutPage() {
       <section
         id="facility-visuals"
         style={{
-          paddingTop: 'clamp(80px, 10vw, 130px)',
-          paddingBottom: 'clamp(80px, 10vw, 130px)',
+          paddingTop: 'clamp(54px, 7vw, 90px)',
+          paddingBottom: 'clamp(54px, 7vw, 90px)',
           backgroundColor: '#0a1128',
           color: '#ffffff'
         }}
@@ -851,8 +851,8 @@ export default function AboutPage() {
       <section
         id="experience-facts"
         style={{
-          paddingTop: 'clamp(48px, 5vw, 70px)',
-          paddingBottom: 'clamp(40px, 4.5vw, 56px)',
+          paddingTop: 'clamp(36px, 4vw, 54px)',
+          paddingBottom: 'clamp(32px, 3.5vw, 44px)',
           backgroundColor: '#fafbfc',
           borderBottom: '1px solid #e5e7eb'
         }}
@@ -970,8 +970,8 @@ export default function AboutPage() {
         id="what-defines-us"
         style={{
           position: 'relative',
-          paddingTop: 'clamp(48px, 5.5vw, 72px)',
-          paddingBottom: 'clamp(72px, 8.5vw, 110px)',
+          paddingTop: 'clamp(44px, 5vw, 68px)',
+          paddingBottom: 'clamp(54px, 6.5vw, 88px)',
           backgroundColor: '#ffffff',
           borderBottom: '1px solid #e5e7eb',
           overflow: 'hidden'
@@ -1374,8 +1374,8 @@ export default function AboutPage() {
         id="about-cta"
         style={{
           position: 'relative',
-          paddingTop: 'clamp(90px, 11vw, 140px)',
-          paddingBottom: 'clamp(90px, 11vw, 140px)',
+          paddingTop: 'clamp(64px, 8vw, 100px)',
+          paddingBottom: 'clamp(64px, 8vw, 100px)',
           backgroundColor: '#0a1128',
           color: '#ffffff',
           overflow: 'hidden',
@@ -1543,43 +1543,100 @@ export default function AboutPage() {
         }
 
         @media (max-width: 990px) {
+          #about-hero {
+            min-height: auto !important;
+            padding: clamp(80px, 10vh, 100px) 0 36px 0 !important;
+          }
+          #our-story {
+            padding-top: 36px !important;
+            padding-bottom: 24px !important;
+          }
+          #how-we-work {
+            padding-top: 28px !important;
+            padding-bottom: 36px !important;
+          }
+          #facility-visuals {
+            padding-top: 36px !important;
+            padding-bottom: 36px !important;
+          }
+          #experience-facts {
+            padding-top: 28px !important;
+            padding-bottom: 28px !important;
+          }
+          #what-defines-us {
+            padding-top: 32px !important;
+            padding-bottom: 36px !important;
+          }
+          #about-cta {
+            padding-top: 44px !important;
+            padding-bottom: 44px !important;
+          }
           .story-split-grid {
             grid-template-columns: 1fr !important;
-            gap: 36px !important;
+            gap: 24px !important;
           }
           .journey-two-col-layout {
             grid-template-columns: 1fr !important;
+            gap: 24px !important;
           }
           .journey-sticky-image {
             position: relative !important;
             top: 0 !important;
             order: -1 !important;
-            margin-bottom: 24px !important;
+            margin-bottom: 16px !important;
           }
           .facts-editorial-layout {
             grid-template-columns: 1fr !important;
-            gap: 28px !important;
+            gap: 20px !important;
           }
           .verified-facts-grid {
             padding-left: 0 !important;
           }
           .editorial-principles-layout {
             grid-template-columns: 1fr !important;
-            gap: 36px !important;
+            gap: 28px !important;
           }
           .editorial-central-visual {
             order: -1 !important;
-            margin-bottom: 20px !important;
+            margin-bottom: 16px !important;
           }
         }
 
         @media (max-width: 640px) {
+          #about-hero {
+            padding: 76px 0 32px 0 !important;
+          }
+          #our-story {
+            padding-top: 30px !important;
+            padding-bottom: 20px !important;
+          }
+          #how-we-work {
+            padding-top: 24px !important;
+            padding-bottom: 30px !important;
+          }
+          #facility-visuals {
+            padding-top: 30px !important;
+            padding-bottom: 30px !important;
+          }
+          #experience-facts {
+            padding-top: 24px !important;
+            padding-bottom: 24px !important;
+          }
+          #what-defines-us {
+            padding-top: 28px !important;
+            padding-bottom: 32px !important;
+          }
+          #about-cta {
+            padding-top: 36px !important;
+            padding-bottom: 36px !important;
+          }
           .editorial-gallery-row {
             grid-template-columns: 1fr !important;
+            gap: 14px !important;
           }
           .verified-facts-grid {
             grid-template-columns: 1fr !important;
-            gap: 20px !important;
+            gap: 16px !important;
           }
         }
       `}</style>

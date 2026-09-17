@@ -171,9 +171,19 @@ export default function About() {
           transform: scale(1.03);
         }
         @media (max-width: 860px) {
+          #about {
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
+          }
           .about-editorial-grid {
             grid-template-columns: 1fr !important;
-            gap: 36px !important;
+            gap: 24px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          #about {
+            padding-top: 32px !important;
+            padding-bottom: 32px !important;
           }
         }
       `}</style>

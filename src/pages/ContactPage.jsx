@@ -17,6 +17,7 @@ export default function ContactPage() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -31,6 +32,9 @@ export default function ContactPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: '' }));
+    }
+    if (submitError) {
+      setSubmitError(null);
     }
   };
 
@@ -56,7 +60,7 @@ export default function ContactPage() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
@@ -65,17 +69,58 @@ export default function ContactPage() {
     }
 
     setIsSubmitting(true);
+    setSubmitError(null);
     setErrors({});
 
-    // Process submission
-    setTimeout(() => {
+    try {
+      const payload = {
+        name: formData.name.trim(),
+        company: formData.company.trim() || 'N/A',
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        service: formData.service,
+        message: formData.message.trim(),
+        _subject: 'New Website Enquiry - Mauli Krupa Precision Works',
+        _template: 'table',
+        _captcha: 'false',
+        _replyto: formData.email.trim()
+      };
+
+      const response = await fetch('https://formsubmit.co/ajax/smauli.krupa@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (response.ok && (result.success === 'true' || result.success === true || result.message)) {
+        setIsSubmitting(false);
+        setSubmitted(true);
+        setFormData({
+          name: '',
+          company: '',
+          email: '',
+          phone: '',
+          service: 'Select a Service',
+          message: ''
+        });
+      } else {
+        throw new Error(result.message || 'Submission failed');
+      }
+    } catch (err) {
+      console.error('Contact Form Submission Error:', err);
       setIsSubmitting(false);
-      setSubmitted(true);
-    }, 600);
+      setSubmitError('Unable to send your enquiry. Please try again.');
+    }
   };
 
   const handleReset = () => {
     setSubmitted(false);
+    setSubmitError(null);
     setFormData({
       name: '',
       company: '',
@@ -99,6 +144,7 @@ export default function ContactPage() {
       {/* SECTION 1 — CINEMATIC CONTACT HERO (Dark Industrial CNC Milling Background)*/}
       {/* ========================================================================= */}
       <section
+        id="contact-hero"
         style={{
           position: 'relative',
           minHeight: 'clamp(460px, 60vh, 580px)',
@@ -197,6 +243,7 @@ export default function ContactPage() {
       {/* SECTION 2 — CONTACT FORM + CONTACT INFORMATION (Spacious 2-Column Layout)  */}
       {/* ========================================================================= */}
       <section
+        id="contact-form-section"
         style={{
           paddingTop: 'clamp(60px, 9vh, 100px)',
           paddingBottom: 'clamp(60px, 9vh, 100px)',
@@ -296,11 +343,11 @@ export default function ContactPage() {
                       textTransform: 'uppercase'
                     }}
                   >
-                    Enquiry Received
+                    Your enquiry has been sent successfully.
                   </h3>
 
                   <p style={{ fontSize: '14.5px', color: '#4b5563', lineHeight: 1.6, margin: '0 0 24px 0' }}>
-                    Thank you, <strong>{formData.name}</strong>. Your enquiry regarding <strong>{formData.service}</strong> has been received. Our technical team at Bhosari MIDC will review your specifications and contact you soon.
+                    Thank you for reaching out to Mauli Krupa Precision Works. Our technical team at Bhosari MIDC will review your specifications and contact you soon.
                   </p>
 
                   <button
@@ -327,6 +374,12 @@ export default function ContactPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                  {/* FormSubmit Configuration Fields */}
+                  <input type="hidden" name="_subject" value="New Website Enquiry - Mauli Krupa Precision Works" />
+                  <input type="hidden" name="_template" value="table" />
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_replyto" value={formData.email} />
+
                   {/* Row 1: Full Name & Company Name */}
                   <div
                     style={{
@@ -594,9 +647,28 @@ export default function ContactPage() {
                         boxShadow: '0 4px 14px rgba(197, 34, 39, 0.25)'
                       }}
                     >
-                      <span>{isSubmitting ? 'TRANSMITTING...' : 'SEND ENQUIRY'}</span>
+                      <span>{isSubmitting ? 'SENDING...' : 'SEND INQUIRY'}</span>
                       <ArrowRight size={16} className="btn-arrow-icon" />
                     </button>
+
+                    {submitError && (
+                      <div
+                        style={{
+                          marginTop: '14px',
+                          padding: '12px 16px',
+                          backgroundColor: '#fef2f2',
+                          border: '1px solid #fecaca',
+                          borderRadius: '2px',
+                          color: '#c52227',
+                          fontFamily: 'var(--font-heading)',
+                          fontSize: '14px',
+                          fontWeight: 600,
+                          lineHeight: 1.4
+                        }}
+                      >
+                        {submitError}
+                      </div>
+                    )}
                   </div>
                 </form>
               )}
@@ -776,6 +848,7 @@ export default function ContactPage() {
       {/* SECTION 3 — LOCATION / MAP (Full-Width Map Showing MAULI KRUPA PRECISION) */}
       {/* ========================================================================= */}
       <section
+        id="contact-map-section"
         style={{
           backgroundColor: '#0a1128',
           color: '#ffffff',
@@ -992,6 +1065,19 @@ export default function ContactPage() {
         }
 
         @media (max-width: 900px) {
+          #contact-hero {
+            min-height: auto !important;
+            padding-top: calc(var(--nav-height, 70px) + 24px) !important;
+            padding-bottom: 36px !important;
+          }
+          #contact-form-section {
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
+          }
+          #contact-map-section {
+            padding-top: 36px !important;
+            padding-bottom: 40px !important;
+          }
           .hero-grid-layout {
             grid-template-columns: 1fr !important;
           }
@@ -1000,17 +1086,25 @@ export default function ContactPage() {
           }
           .contact-two-col-grid {
             grid-template-columns: 1fr !important;
-            gap: 48px !important;
+            gap: 36px !important;
           }
           .contact-right-col {
             padding-left: 0 !important;
             border-left: none !important;
             border-top: 1px solid #e5e7eb;
-            padding-top: 36px;
+            padding-top: 28px;
           }
         }
 
         @media (max-width: 600px) {
+          #contact-form-section {
+            padding-top: 32px !important;
+            padding-bottom: 32px !important;
+          }
+          #contact-map-section {
+            padding-top: 28px !important;
+            padding-bottom: 32px !important;
+          }
           .editorial-submit-btn {
             width: 100% !important;
             justify-content: center !important;

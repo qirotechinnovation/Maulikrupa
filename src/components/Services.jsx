@@ -71,7 +71,7 @@ export default function Services() {
     {
       number: '05',
       id: 'spm',
-      title: 'SPM',
+      title: 'Special Purpose Machines (SPM)',
       description: 'Special Purpose Machines (SPM) and custom automated manufacturing equipment engineered to streamline dedicated production operations.',
       image: '/images/service_custom_spm.jpg',
       alt: 'Special Purpose Machines, Custom Automated Machinery & Testing Rigs',
@@ -627,11 +627,24 @@ export default function Services() {
         }
 
         @media (max-width: 768px) {
+          #services {
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
+          }
           .services-showcase-viewport {
-            min-height: 440px !important;
+            min-height: 380px !important;
           }
           .showcase-dots {
             display: none !important;
+          }
+        }
+        @media (max-width: 480px) {
+          #services {
+            padding-top: 32px !important;
+            padding-bottom: 32px !important;
+          }
+          .services-showcase-viewport {
+            min-height: 360px !important;
           }
         }
       `}</style>
