@@ -15,8 +15,15 @@ function ScrollHandler() {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    // Immediate scroll to top on route change
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { immediate: true });
+      window.__lenis.resize();
+    }
+
     if (hash) {
-      setTimeout(() => {
+      const scrollTimer = setTimeout(() => {
         const element = document.querySelector(hash);
         if (element) {
           const navOffset = 80;
@@ -28,21 +35,36 @@ function ScrollHandler() {
             window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
           }
         }
-      }, 80);
-    } else {
-      // Immediate scroll to top and sync Lenis layout dimensions
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      if (window.__lenis) {
-        window.__lenis.scrollTo(0, { immediate: true });
-        window.__lenis.resize();
-      }
-      // Re-check resize after page content mounts
-      setTimeout(() => {
-        if (window.__lenis) {
-          window.__lenis.resize();
-        }
-        window.dispatchEvent(new Event('resize'));
       }, 100);
+      return () => clearTimeout(scrollTimer);
+    } else {
+      // Staggered resize updates to ensure Lenis measures correct document dimensions after route transition
+      const t1 = setTimeout(() => {
+        if (window.__lenis) window.__lenis.resize();
+        window.dispatchEvent(new Event('resize'));
+      }, 50);
+
+      const t2 = setTimeout(() => {
+        if (window.__lenis) window.__lenis.resize();
+        window.dispatchEvent(new Event('resize'));
+      }, 150);
+
+      const t3 = setTimeout(() => {
+        if (window.__lenis) window.__lenis.resize();
+        window.dispatchEvent(new Event('resize'));
+      }, 350);
+
+      const t4 = setTimeout(() => {
+        if (window.__lenis) window.__lenis.resize();
+        window.dispatchEvent(new Event('resize'));
+      }, 700);
+
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        clearTimeout(t3);
+        clearTimeout(t4);
+      };
     }
   }, [pathname, hash]);
 
@@ -72,6 +94,20 @@ export default function App() {
 
     window.__lenis = lenis;
 
+    // Attach continuous document ResizeObserver so Lenis immediately adapts to any route content changes
+    let docObserver = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      docObserver = new ResizeObserver(() => {
+        if (window.__lenis) {
+          window.__lenis.resize();
+        }
+      });
+      docObserver.observe(document.documentElement);
+      if (document.body) {
+        docObserver.observe(document.body);
+      }
+    }
+
     let rafId;
     function raf(time) {
       lenis.raf(time);
@@ -81,6 +117,9 @@ export default function App() {
 
     return () => {
       cancelAnimationFrame(rafId);
+      if (docObserver) {
+        docObserver.disconnect();
+      }
       lenis.destroy();
       window.__lenis = null;
     };

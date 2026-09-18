@@ -7,18 +7,54 @@ const FRAME_PATHS = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
   `/images/cad_dense_sequence/frame_${String(i).padStart(2, '0')}.webp`
 );
 
+// Persistent image cache across all React route navigation cycles
+let globalSequenceImages = null;
+let globalFallbackImages = null;
+
+function preloadAllImages() {
+  if (typeof window === 'undefined') return;
+
+  if (!globalFallbackImages) {
+    const stageFallbackPaths = [
+      '/images/cad_fixture/fixture_assembled.webp',
+      '/images/cad_fixture/part_left_clamps.webp',
+      '/images/cad_fixture/part_right_slide.webp',
+      '/images/cad_fixture/part_base_plate.webp',
+      '/images/cad_fixture/fixture_exploded.webp'
+    ];
+    globalFallbackImages = stageFallbackPaths.map((path) => {
+      const img = new Image();
+      img.src = path;
+      return img;
+    });
+  }
+
+  if (!globalSequenceImages) {
+    globalSequenceImages = new Array(TOTAL_FRAMES);
+    const priorityIndices = [0, 12, 24, 36, 48, 59];
+    const allIndices = Array.from({ length: TOTAL_FRAMES }, (_, i) => i);
+    const loadOrder = [...priorityIndices, ...allIndices.filter((i) => !priorityIndices.includes(i))];
+
+    loadOrder.forEach((idx) => {
+      const img = new Image();
+      img.src = FRAME_PATHS[idx];
+      globalSequenceImages[idx] = img;
+    });
+  }
+}
+
+// Preload immediately on script load
+preloadAllImages();
+
 export default function Industries() {
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef(null);
   const canvasRef = useRef(null);
   const shadowRef = useRef(null);
   const promptRef = useRef(null);
-  const imagesRef = useRef([]);
   const targetProgressRef = useRef(0);
   const currentProgressRef = useRef(0);
   const rafIdRef = useRef(null);
-
-  const stageFallbackImagesRef = useRef([]);
 
   // Dedicated function to redraw current frame on canvas
   const renderFrameRef = useRef(null);
@@ -144,54 +180,35 @@ export default function Industries() {
     'STAGE 06 — FULLY EXPLODED'
   ];
 
-  // Preload priority stage keyframe fallbacks and sequence frames into memory
-  useEffect(() => {
-    // 1. Preload 5 primary stage fallback images immediately
-    const stageFallbackPaths = [
-      '/images/cad_fixture/fixture_assembled.webp',
-      '/images/cad_fixture/part_left_clamps.webp',
-      '/images/cad_fixture/part_right_slide.webp',
-      '/images/cad_fixture/part_base_plate.webp',
-      '/images/cad_fixture/fixture_exploded.webp'
-    ];
-    stageFallbackImagesRef.current = stageFallbackPaths.map((path) => {
-      const img = new Image();
-      img.src = path;
-      img.onload = () => {
-        if (renderFrameRef.current) {
-          renderFrameRef.current(currentProgressRef.current);
-        }
-      };
-      return img;
-    });
-
-    // 2. Preload 60 dense CAD sequence frames with priority on stage keyframe indices
-    const loadedImages = new Array(TOTAL_FRAMES);
-    const priorityIndices = [0, 12, 24, 36, 48, 59];
-    const allIndices = Array.from({ length: TOTAL_FRAMES }, (_, i) => i);
-    const loadOrder = [...priorityIndices, ...allIndices.filter((i) => !priorityIndices.includes(i))];
-
-    loadOrder.forEach((idx) => {
-      const img = new Image();
-      img.src = FRAME_PATHS[idx];
-      img.onload = () => {
-        loadedImages[idx] = img;
-        if (renderFrameRef.current) {
-          renderFrameRef.current(currentProgressRef.current);
-        }
-      };
-      loadedImages[idx] = img;
-    });
-
-    imagesRef.current = loadedImages;
-  }, []);
-
   // Dedicated 60fps RAF loop with zero React re-render overhead during continuous scrubbing
   useEffect(() => {
+    preloadAllImages();
     let isRunning = true;
 
+    // Attach onload handlers to any pending images in the global cache
+    const onImgLoad = () => {
+      if (renderFrameRef.current) {
+        renderFrameRef.current(currentProgressRef.current);
+      }
+    };
+
+    if (globalSequenceImages) {
+      globalSequenceImages.forEach((img) => {
+        if (img && !img.complete) {
+          img.addEventListener('load', onImgLoad, { once: true });
+        }
+      });
+    }
+    if (globalFallbackImages) {
+      globalFallbackImages.forEach((img) => {
+        if (img && !img.complete) {
+          img.addEventListener('load', onImgLoad, { once: true });
+        }
+      });
+    }
+
     const getBestImage = (progressVal) => {
-      const images = imagesRef.current;
+      const images = globalSequenceImages;
       const floatIndex = progressVal * (TOTAL_FRAMES - 1);
       const targetIdx = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.round(floatIndex)));
 
@@ -219,7 +236,7 @@ export default function Industries() {
 
       // 3. Fallback to stage keyframe image
       const stageIdx = Math.min(4, Math.max(0, Math.floor(progressVal * 5)));
-      const fallbacks = stageFallbackImagesRef.current;
+      const fallbacks = globalFallbackImages;
       if (fallbacks && fallbacks[stageIdx] && fallbacks[stageIdx].complete && fallbacks[stageIdx].naturalWidth > 0) {
         return fallbacks[stageIdx];
       }
@@ -251,7 +268,7 @@ export default function Industries() {
 
     renderFrameRef.current = renderFrame;
 
-    // Render immediately on mount
+    // Render Stage 01 immediately on mount
     renderFrame(currentProgressRef.current);
 
     const updateLoop = () => {
@@ -323,6 +340,7 @@ export default function Industries() {
     const checkLenis = () => {
       if (window.__lenis) {
         window.__lenis.on('scroll', handleScroll);
+        window.__lenis.resize();
       }
     };
     checkLenis();
@@ -341,6 +359,9 @@ export default function Industries() {
     if (window.ResizeObserver && sectionRef.current) {
       ro = new ResizeObserver(() => {
         handleScroll();
+        if (window.__lenis) {
+          window.__lenis.resize();
+        }
       });
       ro.observe(sectionRef.current);
     }
@@ -350,6 +371,7 @@ export default function Industries() {
       window.removeEventListener('resize', handleScroll);
       if (window.__lenis) {
         window.__lenis.off('scroll', handleScroll);
+        window.__lenis.resize();
       }
       clearTimeout(lenisTimer);
       clearTimeout(t1);

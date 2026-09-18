@@ -9,6 +9,10 @@ import ContactCTA from '../components/ContactCTA';
 export default function HomePage() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { immediate: true });
+      window.__lenis.resize();
+    }
   }, []);
 
   return (
