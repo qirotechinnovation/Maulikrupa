@@ -178,7 +178,7 @@ export default function AboutPage() {
               animation: 'fadeInUp 0.7s 0.2s ease forwards'
             }}
           >
-            Precision tooling, custom fixtures and engineering solutions built for demanding industrial applications in Bhosari MIDC, Pune since 2015.
+            Precision tooling, custom fixtures and engineering solutions built for demanding industrial applications in Bhosari MIDC, Pune since 2014.
           </p>
 
           {/* Minimal SCROLL TO EXPLORE Indicator */}
@@ -384,7 +384,7 @@ export default function AboutPage() {
                     textTransform: 'uppercase'
                   }}
                 >
-                  EST. 2015 // BHOSARI MIDC · PUNE
+                  EST. 2014 // BHOSARI MIDC · PUNE
                 </div>
               </div>
 
@@ -922,7 +922,7 @@ export default function AboutPage() {
               {/* Fact 1 */}
               <div>
                 <div style={{ fontFamily: 'var(--font-tech)', fontSize: 'clamp(32px, 3.5vw, 44px)', fontWeight: 900, color: '#111827', lineHeight: 1 }}>
-                  2015
+                  2014
                 </div>
                 <div style={{ fontFamily: 'var(--font-tech)', fontSize: '11.5px', fontWeight: 700, color: '#c52227', letterSpacing: '0.08em', marginTop: '6px', textTransform: 'uppercase' }}>
                   ESTD. YEAR
@@ -935,7 +935,7 @@ export default function AboutPage() {
               {/* Fact 2 */}
               <div>
                 <div style={{ fontFamily: 'var(--font-tech)', fontSize: 'clamp(32px, 3.5vw, 44px)', fontWeight: 900, color: '#111827', lineHeight: 1 }}>
-                  10+
+                  12+
                 </div>
                 <div style={{ fontFamily: 'var(--font-tech)', fontSize: '11.5px', fontWeight: 700, color: '#c52227', letterSpacing: '0.08em', marginTop: '6px', textTransform: 'uppercase' }}>
                   YEARS EXPERIENCE

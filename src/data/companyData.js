@@ -1,8 +1,8 @@
 export const COMPANY_INFO = {
   name: "Mauli Krupa Precision Works",
   tagline: "Precision Engineering & Manufacturing Solutions",
-  establishedYear: "2015",
-  estdText: "ESTD. 2015",
+  establishedYear: "2014",
+  estdText: "ESTD. 2014",
   triad: "DESIGN — MANUFACTURE — DELIVER",
   mission: "Design & Manufacturing of Jigs & Fixtures, Industrial Conveyors, Trolleys, Material Handling Equipment & Precision Fabrication Works.",
   
@@ -14,7 +14,7 @@ export const COMPANY_INFO = {
       phoneRaw: "+919370741361"
     },
     {
-      name: "Santos Marotkar",
+      name: "Santosh Marotkar",
       role: "Proprietor & Engineering Lead",
       phone: "+91 9822327460",
       phoneRaw: "+919822327460"
@@ -91,7 +91,7 @@ export const COMPANY_INFO = {
 
   impactHighlights: [
     {
-      title: "Estd. 2015 Experience",
+      title: "Estd. 2014 Experience",
       desc: "Over a decade of specialized industrial manufacturing and custom fixture development for automotive & engineering OEMs."
     },
     {

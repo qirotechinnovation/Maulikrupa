@@ -42,8 +42,8 @@ export default function Footer() {
           borderTop: '1px solid #1f242d',
           color: '#d1d5db',
           position: 'relative',
-          paddingTop: '64px',
-          paddingBottom: '28px',
+          paddingTop: '48px',
+          paddingBottom: '20px',
           overflow: 'hidden'
         }}
       >
@@ -54,23 +54,23 @@ export default function Footer() {
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(12, 1fr)',
-              gap: 'clamp(28px, 4vw, 44px)',
-              marginBottom: '44px'
+              gap: 'clamp(24px, 3.5vw, 40px)',
+              marginBottom: '28px'
             }}
             className="footer-grid-layout"
           >
             {/* Column 1: Brand & Identity */}
             <div style={{ gridColumn: 'span 4' }} className="footer-col-1">
-              <div style={{ marginBottom: '18px', display: 'inline-block' }}>
+              <div style={{ marginBottom: '12px', display: 'inline-block' }}>
                 <Logo size={54} theme="dark" showText={true} />
               </div>
               
               <p 
                 style={{ 
                   color: '#94a3b8', 
-                  fontSize: '13.5px', 
-                  lineHeight: 1.65, 
-                  marginBottom: '18px',
+                  fontSize: '14.5px', 
+                  lineHeight: 1.6, 
+                  marginBottom: '14px',
                   maxWidth: '320px' 
                 }}
               >
@@ -78,12 +78,12 @@ export default function Footer() {
               </p>
 
               {/* Verified Credentials Badges */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12.5px', color: '#e2e8f0' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13.5px', color: '#e2e8f0' }}>
                   <Award size={14} color="#c52227" />
-                  <span style={{ fontFamily: 'var(--font-tech)' }}>ESTD. 2015 • Bhosari MIDC, Pune</span>
+                  <span style={{ fontFamily: 'var(--font-tech)' }}>ESTD. 2014 • Bhosari MIDC, Pune</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12.5px', color: '#e2e8f0' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13.5px', color: '#e2e8f0' }}>
                   <ShieldCheck size={14} color="#0e8a44" />
                   <span style={{ fontFamily: 'var(--font-tech)' }}>GSTIN: {COMPANY_INFO.taxIdentifiers.gstin}</span>
                 </div>
@@ -95,23 +95,23 @@ export default function Footer() {
               <div 
                 style={{
                   fontFamily: 'var(--font-tech)',
-                  fontSize: '12.5px',
+                  fontSize: '16px',
                   fontWeight: 700,
                   color: '#ffffff',
                   letterSpacing: '0.08em',
-                  marginBottom: '16px'
+                  marginBottom: '12px'
                 }}
               >
                 Navigation
               </div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '9px' }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {navLinks.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.path}
                       onClick={(e) => handleLinkClick(e, link.path)}
                       style={{
-                        fontSize: '13px',
+                        fontSize: '15.5px',
                         color: '#94a3b8',
                         fontFamily: 'var(--font-tech)',
                         letterSpacing: '0.04em',
@@ -124,7 +124,7 @@ export default function Footer() {
                       onMouseEnter={(e) => e.currentTarget.style.color = '#ffffff'}
                       onMouseLeave={(e) => e.currentTarget.style.color = '#94a3b8'}
                     >
-                      <ChevronRight size={12} color="#c52227" />
+                      <ChevronRight size={13} color="#c52227" />
                       <span>{link.label}</span>
                     </a>
                   </li>
@@ -137,23 +137,23 @@ export default function Footer() {
               <div 
                 style={{
                   fontFamily: 'var(--font-tech)',
-                  fontSize: '12.5px',
+                  fontSize: '16px',
                   fontWeight: 700,
                   color: '#ffffff',
                   letterSpacing: '0.08em',
-                  marginBottom: '16px'
+                  marginBottom: '12px'
                 }}
               >
                 Capabilities
               </div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '9px' }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {serviceLinks.map((service) => (
                   <li key={service.label}>
                     <a
                       href={service.path}
                       onClick={(e) => handleLinkClick(e, service.path)}
                       style={{
-                        fontSize: '13px',
+                        fontSize: '15.5px',
                         color: '#94a3b8',
                         fontFamily: 'var(--font-tech)',
                         letterSpacing: '0.04em',
@@ -166,7 +166,7 @@ export default function Footer() {
                       onMouseEnter={(e) => e.currentTarget.style.color = '#ffffff'}
                       onMouseLeave={(e) => e.currentTarget.style.color = '#94a3b8'}
                     >
-                      <ChevronRight size={12} color="#c52227" />
+                      <ChevronRight size={13} color="#c52227" />
                       <span>{service.label}</span>
                     </a>
                   </li>
@@ -179,23 +179,23 @@ export default function Footer() {
               <div 
                 style={{
                   fontFamily: 'var(--font-tech)',
-                  fontSize: '12.5px',
+                  fontSize: '16px',
                   fontWeight: 700,
                   color: '#ffffff',
                   letterSpacing: '0.08em',
-                  marginBottom: '16px'
+                  marginBottom: '12px'
                 }}
               >
                 Address
               </div>
               
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div>
                   <div 
                     style={{ 
-                      fontSize: '13.5px', 
+                      fontSize: '15.5px', 
                       color: '#cbd5e1', 
-                      lineHeight: 1.65,
+                      lineHeight: 1.55,
                       fontWeight: 400
                     }}
                   >
@@ -209,47 +209,48 @@ export default function Footer() {
                 <div>
                   <div 
                     style={{ 
-                      fontSize: '11.5px', 
+                      fontSize: '13.5px', 
                       color: '#94a3b8', 
-                      textTransform: 'uppercase', 
-                      letterSpacing: '0.06em', 
+                      letterSpacing: '0.08em', 
                       fontFamily: 'var(--font-heading)',
-                      fontWeight: 600,
+                      fontWeight: 700,
                       marginBottom: '4px'
                     }}
                   >
                     Technical Direct:
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     <a 
                       href="tel:+919370741361" 
                       style={{ 
-                        fontSize: '13.5px', 
+                        fontSize: '15.5px', 
                         color: '#f87171', 
                         fontFamily: 'var(--font-heading)', 
                         fontWeight: 600, 
                         textDecoration: 'none',
-                        transition: 'color 0.2s ease' 
+                        transition: 'color 0.2s ease',
+                        whiteSpace: 'nowrap'
                       }}
                       onMouseEnter={(e) => e.currentTarget.style.color = '#ffffff'}
                       onMouseLeave={(e) => e.currentTarget.style.color = '#f87171'}
                     >
-                      Abhishek M: +91 9370741361
+                      Abhishek M: +91 93707 41361
                     </a>
                     <a 
                       href="tel:+919822327460" 
                       style={{ 
-                        fontSize: '13.5px', 
+                        fontSize: '15.5px', 
                         color: '#f87171', 
                         fontFamily: 'var(--font-heading)', 
                         fontWeight: 600, 
                         textDecoration: 'none',
-                        transition: 'color 0.2s ease' 
+                        transition: 'color 0.2s ease',
+                        whiteSpace: 'nowrap'
                       }}
                       onMouseEnter={(e) => e.currentTarget.style.color = '#ffffff'}
                       onMouseLeave={(e) => e.currentTarget.style.color = '#f87171'}
                     >
-                      Santos M: +91 9822327460
+                      Santosh M: +91 98223 27460
                     </a>
                   </div>
                 </div>
@@ -257,25 +258,26 @@ export default function Footer() {
                 <div>
                   <div 
                     style={{ 
-                      fontSize: '11.5px', 
+                      fontSize: '13.5px', 
                       color: '#94a3b8', 
                       textTransform: 'uppercase', 
-                      letterSpacing: '0.06em', 
+                      letterSpacing: '0.08em', 
                       fontFamily: 'var(--font-heading)',
-                      fontWeight: 600,
+                      fontWeight: 700,
                       marginBottom: '3px'
                     }}
                   >
-                    Email:
+                    EMAIL:
                   </div>
                   <a 
                     href={`mailto:${COMPANY_INFO.email.toLowerCase()}`} 
                     style={{ 
-                      fontSize: '13.5px', 
+                      fontSize: '15.5px', 
                       color: '#e2e8f0', 
                       textDecoration: 'none',
                       textTransform: 'lowercase',
-                      transition: 'color 0.2s ease'
+                      transition: 'color 0.2s ease',
+                      wordBreak: 'break-all'
                     }}
                     onMouseEnter={(e) => e.currentTarget.style.color = '#f87171'}
                     onMouseLeave={(e) => e.currentTarget.style.color = '#e2e8f0'}
@@ -291,13 +293,13 @@ export default function Footer() {
           {/* Bottom Copyright & Qiro Tech Credit Bar */}
           <div 
             style={{
-              paddingTop: '20px',
+              paddingTop: '16px',
               borderTop: '1px solid #1f242d',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               flexWrap: 'wrap',
-              gap: '14px',
+              gap: '12px',
               fontSize: '13px',
               color: '#94a3b8'
             }}

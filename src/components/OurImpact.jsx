@@ -10,7 +10,7 @@ export default function OurImpact() {
   const metrics = [
     {
       id: 'projects',
-      target: 50,
+      target: 465,
       suffix: '+',
       padZero: false,
       delay: 0,
@@ -19,21 +19,21 @@ export default function OurImpact() {
     },
     {
       id: 'sectors',
-      target: 5,
+      target: 6,
       suffix: '',
       padZero: true,
       delay: 100,
       title: 'Industrial Sectors Served',
-      detail: 'Automotive, railways, automated production, heavy fabrication & defense.'
+      detail: 'Engineering, food processing, automobile, pharmaceutical & medical, oil & gas, and chemical industry.'
     },
     {
       id: 'experience',
-      target: 10,
+      target: 12,
       suffix: '+',
       padZero: false,
       delay: 200,
       title: 'Years of Experience',
-      detail: 'Established in Bhosari MIDC, Pune in 2015 with in-house design, machining & fabrication.'
+      detail: 'Established in Bhosari MIDC, Pune in 2014 with in-house design, machining & fabrication.'
     }
   ];
 
@@ -138,7 +138,7 @@ export default function OurImpact() {
     };
   }, [isVisible]);
 
-  // Formats numbers cleanly: 0 -> 50+, 00 -> 05, 0 -> 10+
+  // Formats numbers cleanly: 0 -> 465+, 00 -> 05, 0 -> 12+
   const formatNumber = (metric, index) => {
     const val = counts[index];
     if (metric.padZero) {
@@ -252,7 +252,7 @@ export default function OurImpact() {
               alignItems: 'start'
             }}
           >
-            {/* METRIC 01: 50+ (Positioned Left Anchor, Span 6) */}
+            {/* METRIC 01: 465+ (Positioned Left Anchor, Span 6) */}
             <div
               className="impact-metric-block"
               style={{
@@ -474,7 +474,7 @@ export default function OurImpact() {
               </div>
             </div>
 
-            {/* METRIC 03: 10+ (Positioned Right Side Opposite, Span 5) */}
+            {/* METRIC 03: 12+ (Positioned Right Side Opposite, Span 5) */}
             <div
               className="impact-metric-block"
               style={{

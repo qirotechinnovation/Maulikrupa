@@ -49,7 +49,7 @@ const SERVICES_DATA = {
     id: 'ss-pipeline',
     name: 'SS Pipeline Fabrication',
     categoryLabel: 'SS FABRICATION',
-    image: '/images/gallery_assets/filtration_skid_20.jpg',
+    image: '/images/service_ss_pipeline.jpg',
     description: 'Precision stainless-steel pipeline spools and utility manifolds fabricated with high-integrity TIG welding for reliable plant fluid transfer and process distribution.',
     highlights: ['Process Piping', 'TIG Welded', 'Utility Lines'],
     idealFor: 'Industrial fluid transfer, process distribution and utility pipelines.'
@@ -67,7 +67,7 @@ const SERVICES_DATA = {
     id: 'ss-passivation',
     name: 'Passivation & Pickling Work',
     categoryLabel: 'SS FABRICATION',
-    image: '/images/gallery_assets/process_skid_19.jpg',
+    image: '/images/service_ss_passivation.jpg',
     description: 'Chemical pickling and passivation treatments to eliminate weld heat tints, surface contaminants and restore the protective chromium oxide layer across stainless fabrications.',
     highlights: ['Surface Treatment', 'Oxide Restoration', 'Corrosion Protection'],
     idealFor: 'Post-weld restoration, chemical-grade fabrications and corrosive environments.'
@@ -85,7 +85,7 @@ const SERVICES_DATA = {
     id: 'ss-glass-blasting',
     name: 'Glass Blasting',
     categoryLabel: 'SS FABRICATION',
-    image: '/images/gallery_assets/vertical_ducts_17.jpg',
+    image: '/images/service_ss_glass_blasting.png',
     description: 'Specialized glass bead abrasive blasting for stainless-steel components to deliver a uniform, clean matte texture while removing micro-burrs and surface discoloration.',
     highlights: ['Matte Finish', 'Abrasive Blasting', 'Surface Cleaning'],
     idealFor: 'Clean visual finishes, uniform matte profiles and component descaling.'
@@ -94,7 +94,7 @@ const SERVICES_DATA = {
     id: 'ss-laser-cutting',
     name: 'Laser Cutting',
     categoryLabel: 'SS FABRICATION',
-    image: '/images/hero_welding_fabrication.jpg',
+    image: '/images/service_ss_laser_cutting.jpg',
     description: 'High-precision CNC fiber laser cutting for stainless-steel sheet and plate materials, delivering burr-free edges, tight tolerances and accurate complex profiles.',
     highlights: ['CNC Laser Cutting', 'Clean Edges', 'Sheet Profiling'],
     idealFor: 'Precision sheet metal parts, mounting brackets and intricate profiles.'
@@ -107,23 +107,32 @@ const SERVICES_DATA = {
     categoryLabel: 'MS FABRICATION',
     image: '/images/service_ms_tube_channel.jpg',
     description: 'Heavy structural mild-steel fabrication utilizing square tubes, channels and I-beams to construct rigid machine bases, structural framing and heavy-duty shopfloor fixtures.',
-    highlights: ['Heavy Structural', 'Machine Bases', 'Robust Frames'],
+    highlights: ['Heavy Structural', 'Machine Bases'],
     idealFor: 'Heavy machine chassis, plant structural frames and equipment skids.'
   },
   'ms-ducting': {
     id: 'ms-ducting',
-    name: 'MS Ducting Work',
+    name: 'MS Square Ducting Work',
     categoryLabel: 'MS FABRICATION',
     image: '/images/service_ms_ducting.jpg',
     description: 'Robust mild-steel ducting lines, dust collector ducts and exhaust channels fabricated for factory ventilation, flue gas exhaust and high-volume industrial airflow.',
     highlights: ['Industrial Ducting', 'Plant Ventilation', 'Exhaust Channels'],
     idealFor: 'Factory exhaust lines, dust extraction systems and heavy airflow ducts.'
   },
+  'ms-round-ducting': {
+    id: 'ms-round-ducting',
+    name: 'MS Round Ducting Work',
+    categoryLabel: 'MS FABRICATION',
+    image: '/images/service_ms_round_ducting.jpg',
+    description: 'Robust mild-steel round ducting fabricated for industrial ventilation, exhaust systems, dust collection and high-volume airflow applications.',
+    highlights: ['Round Ducting', 'Industrial Ventilation', 'Exhaust Channels'],
+    idealFor: 'Factory exhaust lines, dust extraction systems and high-volume industrial airflow applications.'
+  },
   'ms-tank': {
     id: 'ms-tank',
     name: 'MS Tank Fabrication',
     categoryLabel: 'MS FABRICATION',
-    image: '/images/gallery_assets/enclosure_cabinet_22.jpg',
+    image: '/images/service_ms_tank.jpg',
     description: 'Custom mild-steel tanks, hydraulic oil reservoirs and process vessels built with reinforced welding to handle demanding industrial storage and fluid containment.',
     highlights: ['Storage Tanks', 'Oil Reservoirs', 'Custom Welded'],
     idealFor: 'Hydraulic power packs, coolant reservoirs and general plant storage.'
@@ -132,7 +141,7 @@ const SERVICES_DATA = {
     id: 'ms-pipeline',
     name: 'MS Pipeline Fabrication',
     categoryLabel: 'MS FABRICATION',
-    image: '/images/service_fabrication.jpg',
+    image: '/images/service_ms_pipeline.jpg',
     description: 'Heavy-duty mild-steel pipeline spools, compressed air lines and cooling water distribution headers fabricated to required pressure ratings and welding standards.',
     highlights: ['Plant Piping', 'Utility Distribution', 'Certified Welding'],
     idealFor: 'Cooling water loops, compressed air lines and utility piping spools.'
@@ -150,7 +159,7 @@ const SERVICES_DATA = {
     id: 'ms-sand-blasting',
     name: 'Sand Blasting & Painting',
     categoryLabel: 'MS FABRICATION',
-    image: '/images/service_sandblasting_painting.jpg',
+    image: '/images/service_ms_sand_blasting.png',
     description: 'Thorough abrasive grit/sand blasting to remove rust, scale and mill contaminants, followed by application of industrial epoxy primer and protective polyurethane topcoats.',
     highlights: ['Grit Blasting', 'Epoxy Primer', 'Protective Coating'],
     idealFor: 'Heavy structural assemblies, plant equipment bases and outdoor installations.'
@@ -170,7 +179,7 @@ const SERVICES_DATA = {
     categoryLabel: 'MS FABRICATION',
     image: '/images/hero_cnc_precision.jpg',
     description: 'Integrated CNC laser profile cutting and hydraulic press-brake bending for mild-steel plates, producing accurate bent sections, covers, guards and brackets.',
-    highlights: ['Laser Cutting', 'Press Brake Bending', 'Custom Forming'],
+    highlights: ['Laser Cutting', 'CNC Bending', 'Custom Forming'],
     idealFor: 'Machine guards, chassis covers, structural brackets and sheet components.'
   },
 
@@ -179,7 +188,7 @@ const SERVICES_DATA = {
     id: 'mach-laser-cutting',
     name: 'Laser Cutting',
     categoryLabel: 'MACHINING',
-    image: '/images/hero_welding_fabrication.jpg',
+    image: '/images/service_ss_laser_cutting.jpg',
     description: 'Precision 2D CNC laser cutting services delivering clean edge definition, tight tolerances and accurate repeatable cutouts across a variety of industrial metals.',
     highlights: ['CNC Laser Profiling', 'Clean Edge Quality', 'Sheet Profiling'],
     idealFor: 'Rapid prototype parts, precision sheet metal profiles and production batches.'
@@ -407,6 +416,26 @@ function getCategoryForServiceId(id) {
   return 'industrial-fabrication';
 }
 
+// Helper to resolve a category from any string / param / alias
+function findCategoryByQuery(query) {
+  if (!query) return null;
+  const normalize = (str) => (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const q = normalize(query);
+  
+  return CATEGORIES.find((c) => {
+    const normId = normalize(c.id);
+    const normLabel = normalize(c.label);
+    const normShort = normalize(c.shortLabel);
+    if (normId === q || normLabel === q || normShort === q) return true;
+    if (q.includes('conveyor') && c.id === 'conveyor-material-handling') return true;
+    if (q.includes('jig') && c.id === 'jigs-fixtures') return true;
+    if (q.includes('fabricat') && c.id === 'industrial-fabrication') return true;
+    if (q.includes('machin') && c.id === 'machining') return true;
+    if ((q.includes('spm') || q.includes('specialpurpose')) && c.id === 'spm') return true;
+    return false;
+  });
+}
+
 // =========================================================================
 // MAIN SERVICES PAGE COMPONENT
 // =========================================================================
@@ -415,10 +444,23 @@ export default function ServicesPage() {
   const [searchParams] = useSearchParams();
 
   // Active Main Category (DEFAULT: 01 Industrial Fabrication)
-  const [activeCategory, setActiveCategory] = useState('industrial-fabrication');
+  const [activeCategory, setActiveCategory] = useState(() => {
+    const param = searchParams.get('category') || searchParams.get('service') || searchParams.get('id');
+    const matched = findCategoryByQuery(param);
+    if (matched) return matched.id;
+    if (param && SERVICES_DATA[param]) return getCategoryForServiceId(param);
+    return 'industrial-fabrication';
+  });
 
-  // Selected single service ID to display on the right (DEFAULT: first item of Industrial Fabrication)
-  const [selectedServiceId, setSelectedServiceId] = useState('ss-tube-structure');
+  // Selected single service ID to display on the right
+  const [selectedServiceId, setSelectedServiceId] = useState(() => {
+    const param = searchParams.get('category') || searchParams.get('service') || searchParams.get('id');
+    const idParam = searchParams.get('id');
+    if (idParam && SERVICES_DATA[idParam]) return idParam;
+    const matched = findCategoryByQuery(param);
+    if (matched) return matched.defaultServiceId;
+    return 'ss-tube-structure';
+  });
 
   // Sub-branch expansion states for sub-levels within the active category
   const [openSS, setOpenSS] = useState(true);
@@ -445,34 +487,30 @@ export default function ServicesPage() {
       setActiveCategory(cat);
       setSelectedServiceId(idParam);
       expandSubBranchesForService(idParam);
-    } else if (serviceParam) {
+      return;
+    }
+
+    const query = catParam || serviceParam;
+    if (query) {
+      const catMatch = findCategoryByQuery(query);
+      if (catMatch) {
+        setActiveCategory(catMatch.id);
+        setSelectedServiceId(catMatch.defaultServiceId);
+        expandSubBranchesForService(catMatch.defaultServiceId);
+        return;
+      }
+
+      // If matches individual service item name/id
+      const normalize = (str) => (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      const normQuery = normalize(query);
       const match = Object.values(SERVICES_DATA).find(
-        (s) => s.name.toLowerCase() === serviceParam.toLowerCase() || s.id.toLowerCase() === serviceParam.toLowerCase()
+        (s) => normalize(s.name) === normQuery || normalize(s.id) === normQuery
       );
       if (match) {
         const cat = getCategoryForServiceId(match.id);
         setActiveCategory(cat);
         setSelectedServiceId(match.id);
         expandSubBranchesForService(match.id);
-      } else {
-        // Check if serviceParam matches a category name
-        const catMatch = CATEGORIES.find(
-          (c) => c.label.toLowerCase() === serviceParam.toLowerCase() || c.id.toLowerCase() === serviceParam.toLowerCase()
-        );
-        if (catMatch) {
-          setActiveCategory(catMatch.id);
-          setSelectedServiceId(catMatch.defaultServiceId);
-          expandSubBranchesForService(catMatch.defaultServiceId);
-        }
-      }
-    } else if (catParam) {
-      const catMatch = CATEGORIES.find(
-        (c) => c.id.toLowerCase() === catParam.toLowerCase() || c.label.toLowerCase() === catParam.toLowerCase()
-      );
-      if (catMatch) {
-        setActiveCategory(catMatch.id);
-        setSelectedServiceId(catMatch.defaultServiceId);
-        expandSubBranchesForService(catMatch.defaultServiceId);
       }
     }
   }, [searchParams]);
@@ -763,7 +801,7 @@ export default function ServicesPage() {
                             </div>
 
                             <div
-                              className={`leaf-item ${selectedServiceId === 'ms-ducting' ? 'is-selected' : ''}`}
+                              className={`leaf-item ${selectedServiceId === 'ms-ducting' || selectedServiceId === 'ms-round-ducting' ? 'is-selected' : ''}`}
                               onClick={() => handleSelectService('ms-ducting')}
                             >
                               <span className="leaf-indicator" />
@@ -1126,6 +1164,90 @@ export default function ServicesPage() {
                 </div>
 
               </div>
+
+              {/* MS Round Ducting Work Block directly below MS Square Ducting Work */}
+              {(currentService.id === 'ms-ducting' || currentService.id === 'ms-round-ducting') && (
+                <div 
+                  className="selected-service-card animate-detail-fade"
+                  style={{ marginTop: '32px' }}
+                >
+                  {/* LEFT: SERVICE IMAGE (45%) */}
+                  <div className="service-detail-image-col">
+                    <div className="detail-image-box">
+                      <img
+                        src="/images/service_ms_round_ducting.jpg"
+                        alt="MS Round Ducting Work"
+                        className="detail-featured-img"
+                      />
+                    </div>
+                  </div>
+
+                  {/* RIGHT: SERVICE INFORMATION (55%) */}
+                  <div className="service-detail-info-col">
+                    
+                    {/* 1. Category Tag */}
+                    <div className="service-category-badge-wrap">
+                      <span className="service-category-label">
+                        {activeCategoryObj.label.toUpperCase()}
+                      </span>
+                      <span className="service-sub-badge">
+                        MS FABRICATION
+                      </span>
+                    </div>
+
+                    {/* 2. Service Name */}
+                    <h2 className="service-title">
+                      MS Round Ducting Work
+                    </h2>
+
+                    {/* 3. Short Description */}
+                    <p className="service-description">
+                      Robust mild-steel round ducting fabricated for industrial ventilation, exhaust systems, dust collection and high-volume airflow applications.
+                    </p>
+
+                    {/* 4. KEY HIGHLIGHTS */}
+                    <div className="service-highlights-block">
+                      <span className="service-section-eyebrow">KEY HIGHLIGHTS</span>
+                      <ul className="service-highlights-list">
+                        <li className="highlight-item">
+                          <span className="highlight-dot" />
+                          <span>Round Ducting</span>
+                        </li>
+                        <li className="highlight-item">
+                          <span className="highlight-dot" />
+                          <span>Industrial Ventilation</span>
+                        </li>
+                        <li className="highlight-item">
+                          <span className="highlight-dot" />
+                          <span>Exhaust Channels</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* 5. One Short "Ideal for" Line */}
+                    <div className="service-ideal-for-wrap">
+                      <span className="ideal-for-label">Ideal for:</span>{' '}
+                      <span className="ideal-for-text">
+                        Factory exhaust lines, dust extraction systems and high-volume industrial airflow applications.
+                      </span>
+                    </div>
+
+                    {/* 6. INQUIRE NOW Action Button */}
+                    <div className="service-action-wrap">
+                      <button
+                        onClick={() => handleInquireNow('MS Round Ducting Work')}
+                        className="service-inquire-btn"
+                        id="service-inquire-now-round-ducting-btn"
+                      >
+                        <span>INQUIRE NOW</span>
+                        <ArrowRight size={15} />
+                      </button>
+                    </div>
+
+                  </div>
+
+                </div>
+              )}
             </main>
 
           </div>

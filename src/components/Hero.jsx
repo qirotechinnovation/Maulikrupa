@@ -86,34 +86,6 @@ export default function Hero() {
       <div className="container-custom" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
         <div style={{ maxWidth: '780px' }}>
           
-          {/* Eyebrow Label */}
-          <div 
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '10px',
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'clamp(12px, 1.1vw, 13.5px)',
-              fontWeight: 600,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              color: '#ef4444',
-              marginBottom: '22px'
-            }}
-          >
-            <span 
-              style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                backgroundColor: '#ef4444',
-                boxShadow: '0 0 10px rgba(239, 68, 68, 0.9)',
-                display: 'inline-block'
-              }} 
-            />
-            <span>PRECISION ENGINEERING · MANUFACTURING</span>
-          </div>
-
           {/* Clean, Modern Industrial Sans-Serif Heading */}
           <h1 
             style={{
@@ -146,7 +118,7 @@ export default function Hero() {
               textShadow: '0 2px 14px rgba(0, 0, 0, 0.8)'
             }}
           >
-            Delivering precision tooling, jigs & fixtures, conveyors, heavy fabrication, and custom machines for leading industrial OEMs.
+            Delivering industrial fabrication, machining, conveyors & material handling, jigs & fixtures, and special purpose machines (SPM).
           </p>
 
         </div>

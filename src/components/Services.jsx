@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, X, CheckCircle2 } from 'lucide-react';
 
 export default function Services() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeModalService, setActiveModalService] = useState(null);
 
   // 5 Core Services matching exact Services page hierarchy & high-resolution industrial assets
   const services = [
@@ -41,7 +39,7 @@ export default function Services() {
     {
       number: '03',
       id: 'conveyor-material-handling',
-      title: 'Conveyor & Material Handling',
+      title: 'Conveyors & Material Handling',
       description: 'Industrial belt, flat slat, and magnetic conveyor systems alongside heavy-duty transit trolleys and steel storage pallets engineered for material movement.',
       image: '/images/service_conveyors.jpg',
       alt: 'Industrial Automated Conveyor Roller Systems and Material Handling Lines',
@@ -86,11 +84,6 @@ export default function Services() {
   ];
 
   const currentService = services[activeIndex];
-
-  const handleReadMore = (e, service) => {
-    e.preventDefault();
-    setActiveModalService(service);
-  };
 
   return (
     <section 
@@ -350,10 +343,10 @@ export default function Services() {
               {currentService.description}
             </p>
 
-            {/* View Specifications and Request Quote Buttons */}
+            {/* View All Services CTA Button */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-              <button
-                onClick={(e) => handleReadMore(e, currentService)}
+              <Link
+                to={`/services?category=${currentService.id}`}
                 className="service-showcase-rm-btn"
                 style={{
                   display: 'inline-flex',
@@ -370,7 +363,7 @@ export default function Services() {
                   textTransform: 'uppercase',
                   boxShadow: '0 4px 14px rgba(197, 34, 39, 0.4)',
                   transition: 'all 0.25s ease',
-                  border: 'none',
+                  textDecoration: 'none',
                   cursor: 'pointer'
                 }}
                 onMouseEnter={(e) => {
@@ -382,26 +375,8 @@ export default function Services() {
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
-                <span>VIEW SPECIFICATIONS</span>
-                <ArrowRight size={14} />
-              </button>
-
-              <Link
-                to="/services"
-                style={{
-                  fontFamily: 'var(--font-tech)',
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  color: '#ffffff',
-                  textDecoration: 'none',
-                  letterSpacing: '0.06em',
-                  textTransform: 'uppercase',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px'
-                }}
-              >
-                <span>VIEW ALL SERVICES →</span>
+                <span>VIEW ALL SERVICES</span>
+                <span style={{ fontSize: '14px', lineHeight: 1 }}>→</span>
               </Link>
             </div>
 
@@ -476,144 +451,6 @@ export default function Services() {
         </div>
 
       </div>
-
-      {/* Service Detail Modal when clicking VIEW SPECIFICATIONS */}
-      {activeModalService && (
-        <div 
-          onClick={() => setActiveModalService(null)}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 120,
-            backgroundColor: 'rgba(10, 12, 16, 0.85)',
-            backdropFilter: 'blur(10px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '20px'
-          }}
-        >
-          <div 
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              maxWidth: '680px',
-              width: '100%',
-              maxHeight: '88vh',
-              overflowY: 'auto',
-              backgroundColor: '#ffffff',
-              borderRadius: '4px',
-              boxShadow: '0 24px 60px rgba(0, 0, 0, 0.3)',
-              position: 'relative',
-              border: '1px solid #e5e7eb'
-            }}
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setActiveModalService(null)}
-              style={{
-                position: 'absolute',
-                top: '14px',
-                right: '14px',
-                zIndex: 10,
-                width: '36px',
-                height: '36px',
-                borderRadius: '50%',
-                backgroundColor: 'rgba(17, 24, 39, 0.8)',
-                color: '#ffffff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                border: 'none'
-              }}
-              aria-label="Close modal"
-            >
-              <X size={18} />
-            </button>
-
-            {/* Modal Image with High Clarity */}
-            <div style={{ height: '280px', width: '100%', position: 'relative', backgroundColor: '#0f1115' }}>
-              <img 
-                src={activeModalService.image} 
-                alt={activeModalService.title}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: activeModalService.objectPosition || 'center' }}
-              />
-            </div>
-
-            {/* Modal Details */}
-            <div style={{ padding: '28px 32px 32px' }}>
-              <div 
-                style={{
-                  fontFamily: 'var(--font-tech)',
-                  fontSize: '12px',
-                  fontWeight: 700,
-                  color: '#c52227',
-                  letterSpacing: '0.1em',
-                  marginBottom: '4px'
-                }}
-              >
-                SERVICE {activeModalService.number}
-              </div>
-
-              <h3 
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: '24px',
-                  fontWeight: 800,
-                  color: '#111827',
-                  marginBottom: '12px'
-                }}
-              >
-                {activeModalService.title}
-              </h3>
-
-              <p style={{ fontSize: '15px', color: '#4b5563', lineHeight: 1.65, marginBottom: '20px' }}>
-                {activeModalService.description}
-              </p>
-
-              {/* Manufacturing Capabilities */}
-              <div>
-                <span 
-                  style={{
-                    display: 'block',
-                    fontFamily: 'var(--font-tech)',
-                    fontSize: '12px',
-                    fontWeight: 700,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.08em',
-                    color: '#111827',
-                    marginBottom: '10px'
-                  }}
-                >
-                  Key Manufacturing Specifications:
-                </span>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '8px' }}>
-                  {activeModalService.specs.map((spec) => (
-                    <div key={spec} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13.5px', color: '#1f2937' }}>
-                      <CheckCircle2 size={15} color="#0e8a44" style={{ flexShrink: 0 }} />
-                      <span>{spec}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <div style={{ marginTop: '24px', display: 'flex', justifyContent: 'flex-end' }}>
-                <Link
-                  to="/contact"
-                  onClick={() => setActiveModalService(null)}
-                  className="btn-primary-red"
-                  style={{ padding: '10px 20px', fontSize: '14px', textDecoration: 'none' }}
-                >
-                  <span>Request RFQ for {activeModalService.title}</span>
-                  <ArrowRight size={15} />
-                </Link>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      )}
 
       <style>{`
         .services-nav-strip::-webkit-scrollbar {

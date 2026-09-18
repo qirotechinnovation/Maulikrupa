@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { COMPANY_INFO } from '../data/companyData';
-import { Sparkles, ArrowRight } from 'lucide-react';
 
 export default function About() {
   return (
@@ -17,7 +16,7 @@ export default function About() {
         borderBottom: '1px solid #e5e7eb'
       }}
     >
-      {/* Architectural Watermark Numeral EST. 2015 */}
+      {/* Architectural Watermark Numeral EST. 2014 */}
       <div 
         style={{
           position: 'absolute',
@@ -35,7 +34,7 @@ export default function About() {
           whiteSpace: 'nowrap'
         }}
       >
-        EST. 2015
+        EST. 2014
       </div>
 
       <div className="container-custom" style={{ position: 'relative', zIndex: 1 }}>
@@ -62,7 +61,7 @@ export default function About() {
             className="about-image-wrapper"
           >
             <img 
-              src="/images/about_workshop_indian.jpg" 
+              src="/images/about_workshop_home.jpg" 
               alt="Mauli Krupa Precision Works Engineers in Bhosari MIDC Pune Workshop"
               style={{
                 width: '100%',
@@ -105,41 +104,11 @@ export default function About() {
                 fontSize: 'clamp(15.5px, 1.25vw, 17px)',
                 lineHeight: 1.7,
                 color: '#4b5563',
-                marginBottom: '24px'
-              }}
-            >
-              Established in 2015 in Bhosari MIDC, Pune, <strong style={{ color: '#111827' }}>Mauli Krupa Precision Works</strong> is a specialized precision manufacturing and engineering company delivering end-to-end design, fabrication, jigs, fixtures, and custom tooling solutions for leading industrial OEMs.
-            </p>
-
-            {/* Highlighted In-House Finishing Statement */}
-            <div 
-              style={{
-                padding: '16px 20px',
-                backgroundColor: 'rgba(14, 138, 68, 0.06)',
-                borderLeft: '3px solid #0e8a44',
-                borderRadius: '0 3px 3px 0',
                 marginBottom: '28px'
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                <Sparkles size={15} color="#0e8a44" />
-                <span 
-                  style={{
-                    fontFamily: 'var(--font-tech)',
-                    fontSize: '12.5px',
-                    fontWeight: 700,
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                    color: '#0e8a44'
-                  }}
-                >
-                  IN-HOUSE FINISHING FACILITY
-                </span>
-              </div>
-              <p style={{ fontSize: '14px', color: '#1f2937', lineHeight: 1.55, margin: 0 }}>
-                {COMPANY_INFO.additionalFacility} Equipped for heavy metal buffing, mirror/satin polishing and chemical passivation.
-              </p>
-            </div>
+              Established in 2014 in Bhosari MIDC, Pune, <strong style={{ color: '#111827' }}>Mauli Krupa Precision Works</strong> is a specialized precision manufacturing and engineering company delivering end-to-end design, fabrication, jigs, fixtures, and custom tooling solutions for leading industrial OEMs.
+            </p>
 
             {/* Minimal Links: READ MORE -> /about and CONTACT US -> /contact */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
