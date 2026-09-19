@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronDown, Crosshair } from 'lucide-react';
+import { ChevronDown, Crosshair } from 'lucide-react';
 
 const TOTAL_FRAMES = 60;
 const FRAME_PATHS = Array.from({ length: TOTAL_FRAMES }, (_, i) => 
@@ -76,7 +76,6 @@ export default function Industries() {
         'Custom jigs, fixtures and tooling',
         'Industrial equipment and machine assemblies'
       ],
-      inquiryText: 'INQUIRE FOR ENGINEERING',
       targetScroll: 0.08
     },
     {
@@ -94,7 +93,6 @@ export default function Industries() {
         'Conveyor and material-handling systems',
         'Custom process-support structures'
       ],
-      inquiryText: 'INQUIRE FOR FOOD PROCESSING',
       targetScroll: 0.25
     },
     {
@@ -112,7 +110,6 @@ export default function Industries() {
         'Conveyor and material-handling systems',
         'Custom machine assemblies'
       ],
-      inquiryText: 'INQUIRE FOR AUTOMOBILE',
       targetScroll: 0.42
     },
     {
@@ -130,7 +127,6 @@ export default function Industries() {
         'Process-support structures & equipment',
         'Precision ducting and custom assemblies'
       ],
-      inquiryText: 'INQUIRE FOR PHARMACEUTICAL & MEDICAL',
       targetScroll: 0.58
     },
     {
@@ -148,7 +144,6 @@ export default function Industries() {
         'Pipeline and structural fabrication',
         'Tanks, supports & equipment structures'
       ],
-      inquiryText: 'INQUIRE FOR OIL & GAS',
       targetScroll: 0.75
     },
     {
@@ -166,7 +161,6 @@ export default function Industries() {
         'Industrial pipelines and ducting',
         'Equipment structures & material handling'
       ],
-      inquiryText: 'INQUIRE FOR CHEMICAL INDUSTRY',
       targetScroll: 0.92
     }
   ];
@@ -931,7 +925,7 @@ export default function Industries() {
                           display: 'flex',
                           flexDirection: 'column',
                           gap: '7px',
-                          marginBottom: '18px'
+                          marginBottom: 0
                         }}
                       >
                         {ind.highlights.map((item, hIdx) => (
@@ -952,39 +946,6 @@ export default function Industries() {
                           </div>
                         ))}
                       </div>
-
-                      {/* Direct CTA Link */}
-                      <Link
-                        to="/contact"
-                        state={{ industry: ind.title }}
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '8px',
-                          fontFamily: 'var(--font-heading)',
-                          fontSize: '12px',
-                          fontWeight: 700,
-                          letterSpacing: '0.06em',
-                          textTransform: 'uppercase',
-                          color: '#c52227',
-                          textDecoration: 'none',
-                          padding: '6px 0',
-                          borderBottom: '1.5px solid rgba(197, 34, 39, 0.3)',
-                          transition: 'all 0.2s ease',
-                          width: 'fit-content'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.borderBottomColor = '#c52227';
-                          e.currentTarget.style.color = '#b31b20';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.borderBottomColor = 'rgba(197, 34, 39, 0.3)';
-                          e.currentTarget.style.color = '#c52227';
-                        }}
-                      >
-                        <span>{ind.inquiryText}</span>
-                        <ArrowRight size={14} />
-                      </Link>
                     </div>
                   );
                 })}
@@ -1137,11 +1098,6 @@ export default function Industries() {
           .right-industry-detail > div:last-child > div > div:nth-child(4) span:last-child {
             font-size: 11px !important;
             line-height: 1.25 !important;
-          }
-          .right-industry-detail a {
-            font-size: 11px !important;
-            padding: 3px 0 !important;
-            margin: 0 auto !important;
           }
         }
 

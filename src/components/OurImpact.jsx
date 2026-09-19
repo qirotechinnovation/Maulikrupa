@@ -19,9 +19,9 @@ export default function OurImpact() {
     },
     {
       id: 'sectors',
-      target: 6,
-      suffix: '',
-      padZero: true,
+      target: 15,
+      suffix: '+',
+      padZero: false,
       delay: 100,
       title: 'Industrial Sectors Served',
       detail: 'Engineering, food processing, automobile, pharmaceutical & medical, oil & gas, and chemical industry.'
