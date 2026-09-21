@@ -281,5 +281,149 @@ export const GALLERY_ITEMS = [
     image: '/images/gallery_png_products/04_pneumatic_lifting_tackle.png',
     description: 'Zero-gravity pneumatic job lifter designed for safe, effortless operator handling of heavy raw castings and machined parts.',
     specs: ['FMC pneumatic balancer cylinder', 'Custom machined gripping jaws', 'Safety anti-drop velocity fuse', '360° rotational swivel shackle']
+  },
+  {
+    id: 'ss-pipeline-fabrication',
+    code: 'MKP-STR-08',
+    title: 'SS Pipeline Fabrication',
+    category: 'Structural Fabrication',
+    image: '/images/service_ss_pipeline.jpg',
+    description: 'Precision stainless-steel pipeline spools and utility manifolds fabricated with high-integrity TIG welding for reliable plant fluid transfer and process distribution.',
+    specs: ['SS 304 / SS 316L schedule piping headers', 'High-integrity TIG welded joints & flanges', 'Factory hydrostatic & leak pressure testing', 'Sanitary process & utility distribution']
+  },
+  {
+    id: 'polishing-buffing-work',
+    code: 'MKP-STR-09',
+    title: 'Polishing & Buffing Work',
+    category: 'Structural Fabrication',
+    image: '/images/service_surface_finishing.jpg',
+    description: 'Precision mechanical polishing and buffing treatments for stainless-steel fabrications to achieve required surface roughness values from fine satin to mirror finishes.',
+    specs: ['Satin matte to mirror finish (Ra < 0.4µm)', 'Internal and external profile buffing', 'Sanitary food and pharmaceutical standard', 'Uniform scratch-free surface profile']
+  },
+  {
+    id: 'passivation-pickling-work',
+    code: 'MKP-STR-10',
+    title: 'Passivation & Pickling Work',
+    category: 'Structural Fabrication',
+    image: '/images/service_ss_passivation.jpg',
+    description: 'Chemical pickling and passivation treatments to eliminate weld heat tints, surface contaminants and restore the protective chromium oxide layer across stainless fabrications.',
+    specs: ['ASTM A380 compliant pickling & passivation', 'Removal of weld heat tint & surface free iron', 'Protective chromium oxide layer restoration', 'Enhanced chemical corrosion resistance']
+  },
+  {
+    id: 'glass-blasting',
+    code: 'MKP-STR-11',
+    title: 'Glass Blasting',
+    category: 'Structural Fabrication',
+    image: '/images/service_ss_glass_blasting.png',
+    description: 'Specialized glass bead abrasive blasting for stainless-steel components to deliver a uniform, clean matte texture while removing micro-burrs and surface discoloration.',
+    specs: ['Non-contaminating fine spherical glass beads', 'Uniform satin matte aesthetic texture', 'Deburring and weld scale removal', 'Zero dimensional distortion on thin gauges']
+  },
+  {
+    id: 'ms-round-ducting-work',
+    code: 'MKP-SHT-05',
+    title: 'MS Round Ducting Work',
+    category: 'Sheet Metal & Ducts',
+    image: '/images/service_ms_round_ducting.jpg',
+    description: 'Robust mild-steel round ducting fabricated for industrial ventilation, exhaust systems, dust collection and high-volume airflow applications.',
+    specs: ['Spiral & longitudinal welded cylindrical ducts', 'Precision angle ring & slip flange joints', 'High-volume exhaust & dust collector lines', 'Internal anti-corrosion primer application']
+  },
+  {
+    id: 'ms-tank-fabrication',
+    code: 'MKP-STR-12',
+    title: 'MS Tank Fabrication',
+    category: 'Structural Fabrication',
+    image: '/images/service_ms_tank.jpg',
+    description: 'Custom mild-steel tanks, hydraulic oil reservoirs and process vessels built with reinforced welding to handle demanding industrial storage and fluid containment.',
+    specs: ['Heavy MS plate welded construction', 'Internal baffle plates & cleanout covers', 'Hydraulic oil reservoir & water storage', '100% leak-tested & pressure verified']
+  },
+  {
+    id: 'ms-pipeline-fabrication',
+    code: 'MKP-STR-13',
+    title: 'MS Pipeline Fabrication',
+    category: 'Structural Fabrication',
+    image: '/images/service_ms_pipeline.jpg',
+    description: 'Heavy-duty mild-steel pipeline spools, compressed air lines and cooling water distribution headers fabricated to required pressure ratings and welding standards.',
+    specs: ['Heavy MS pipe spools & manifold headers', 'Precision welded flange connections', 'High-pressure hydraulic & pneumatic lines', 'Anti-rust primer and protective coating']
+  },
+  {
+    id: 'powder-coating',
+    code: 'MKP-ENC-04',
+    title: 'Powder Coating',
+    category: 'Enclosures & Cabinets',
+    image: '/images/service_ms_powder_coating.jpg',
+    description: 'Industrial electrostatic powder coating and oven curing for mild-steel fabrications, providing long-lasting corrosion protection, impact durability and uniform color finish.',
+    specs: ['Electrostatic powder coating application', 'High-temperature thermal oven baking', 'Superior scratch & chemical resistance', 'Custom RAL shades & gloss/matte textures']
+  },
+  {
+    id: 'sand-blasting-painting',
+    code: 'MKP-STR-14',
+    title: 'Sand Blasting & Painting',
+    category: 'Structural Fabrication',
+    image: '/images/service_ms_sand_blasting.png',
+    description: 'Thorough abrasive grit/sand blasting to remove rust, scale and mill contaminants, followed by application of industrial epoxy primer and protective polyurethane topcoats.',
+    specs: ['Sa 2.5 standard abrasive blast cleaning', 'Complete removal of mill scale and rust', 'Multi-coat epoxy primer and PU topcoat', 'High-durability outdoor corrosion protection']
+  },
+  {
+    id: 'laser-cutting-forming',
+    code: 'MKP-SHT-06',
+    title: 'Laser Cutting & Forming',
+    category: 'Sheet Metal & Ducts',
+    image: '/images/hero_cnc_precision.jpg',
+    description: 'Integrated CNC laser profile cutting and hydraulic press-brake bending for mild-steel plates, producing accurate bent sections, covers, guards and brackets.',
+    specs: ['CNC fiber laser profile cutting', 'Multi-axis CNC press brake bending', 'Accurate brackets, guards and enclosures', 'High batch-to-batch repeatability']
+  },
+  {
+    id: 'laser-cutting',
+    code: 'MKP-SHT-07',
+    title: 'Laser Cutting',
+    category: 'Sheet Metal & Ducts',
+    image: '/images/service_ss_laser_cutting.jpg',
+    description: 'Precision 2D CNC laser cutting services delivering clean edge definition, tight tolerances and accurate repeatable cutouts across a variety of industrial metals.',
+    specs: ['High-power fiber laser cutting', 'Clean burr-free edge finish', 'Sheet & plate cutting up to heavy gauge', 'Tight dimensional tolerance ±0.1mm']
+  },
+  {
+    id: 'drilling-operations',
+    code: 'MKP-MAC-05',
+    title: 'Drilling',
+    category: 'Machine Structures',
+    image: '/images/service_custom_machines_spm.jpg',
+    description: 'Heavy radial and multi-spindle drilling, precision boring and thread tapping operations across thick steel plates, flanges and structural fabrications.',
+    specs: ['Heavy radial drilling machine capacity', 'Precision boring & reaming operations', 'Multi-hole flange bolt PCD drilling', 'Accurate tapping for M6 to M48 threads']
+  },
+  {
+    id: 'surface-grinding',
+    code: 'MKP-MAC-06',
+    title: 'Surface Grinding',
+    category: 'Machine Structures',
+    image: '/images/service_surface_grinding_precision.jpg',
+    description: 'Precision surface grinding to produce ultra-flat datum faces, parallel guideways, spacer plates and tool steel blocks with mirror-grade surface finishes.',
+    specs: ['Precision magnetic chuck surface grinder', 'Parallelism & flatness within 0.005mm', 'Hardened die block & slide face finishing', 'Fine mirror-grade surface texture']
+  },
+  {
+    id: 'flat-conveyor',
+    code: 'MKP-EQP-06',
+    title: 'Flat Conveyor',
+    category: 'Industrial Equipment',
+    image: '/images/service_conveyors.jpg',
+    description: 'Modular flat slat and roller conveyor solutions designed for stable component movement, inline buffering and seamless integration with production machinery.',
+    specs: ['Modular flat slat & roller transit line', 'Rigid MS/SS structural frame construction', 'Smooth quiet drive motor with speed control', 'Engineered for assembly & packaging lines']
+  },
+  {
+    id: 'industrial-pallets',
+    code: 'MKP-EQP-07',
+    title: 'Industrial Pallets',
+    category: 'Industrial Equipment',
+    image: '/images/gallery_products/04_material_handling_trolley.png',
+    description: 'Heavy-gauge steel fabricated storage pallets and stackable stillages engineered for safe warehouse racking, heavy component storage and transport durability.',
+    specs: ['Heavy-duty welded steel tubular frame', 'Stackable interlocking corner posts', 'High load capacity warehouse stillages', 'Corrosion-resistant epoxy coat finish']
+  },
+  {
+    id: 'engine-testing-machine',
+    code: 'MKP-EQP-08',
+    title: 'Engine Testing Machine',
+    category: 'Industrial Equipment',
+    image: '/images/gallery_engine_testing_machine.jpg',
+    description: 'Turnkey skid-mounted engine testing and fluid circulation system featuring heavy structural steel enclosure, stainless steel process chamber, high-pressure booster pumps, and precision instrumentation.',
+    specs: ['Heavy structural steel frame with hinged access doors', 'SS 304/316L high-pressure process chamber & manifolds', 'Integrated electric booster pumps & digital pressure gauges', 'Hydrostatically tested for high-integrity dynamic operation']
   }
 ];
